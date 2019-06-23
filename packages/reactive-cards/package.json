@@ -1,0 +1,37 @@
+{
+  "name": "reactive-cards",
+  "version": "0.5.0",
+  "description": "Renders JSX components to Adaptive Card JSON on the server and in the browser.",
+  "main": "src/index.ts",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "berun-scripts lint"
+  },
+  "authors": [
+    "Guy Barnard",
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "keywords": [
+    "html",
+    "hyperscript",
+    "preact",
+    "adaptivecards",
+    "jsx",
+    "renderer",
+    "strings"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {},
+  "license": "MIT",
+  "devDependencies": {
+    "@berun/dev-scripts": "^2.0.25"
+  }
+}

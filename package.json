@@ -1,0 +1,37 @@
+{
+  "name": "rdx-mono-repository",
+  "description": "Reactive Dialogs (RDX) for digital conversations",
+  "private": true,
+  "version": "0.5.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "author": {
+    "name": "Internet Of Protocols Association (IOPA)"
+  },
+  "devDependencies": {
+    "lerna": "^3.15.0",
+    "rimraf": "^2.6.3",
+    "tslint": "^5.18.0",
+    "typescript": "3.5.2",
+    "ts-node": "^8.3.0",
+    "@berun/dev-scripts": "^2.0.25"
+    },
+    "scripts": {
+      "build": "lerna run build",
+      "clean": "rimraf **/build && rimraf **/dist && rimraf **/node_modules && rm -rf yarn.lock && rm -rf .fusebox",
+      "lint": "lerna run lint",
+      "postinstall": "yarn build"
+    },
+  "dependencies": {
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0",
+    "@babel/core": "7.4.5",
+    "typescript": "3.5.2"
+  },
+  "workspaces": [
+		"packages/*"
+	]
+}

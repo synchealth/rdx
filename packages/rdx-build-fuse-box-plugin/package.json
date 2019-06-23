@@ -1,0 +1,40 @@
+{
+  "name": "@rdx-js/build-fuse-box-plugin",
+  "version": "0.5.0",
+  "scripts": {
+    "build": "tsc",
+    "lint": "berun-dev lint"
+  },
+  "main": "dist/",
+  "typings": "dist/",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "keywords": [
+    "md",
+    "rdx",
+    "karla",
+    "config",
+    "api"
+  ],
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "authors": [
+    "Tinia Labs",
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@rdx-js/rdx": "^0.5.0"
+  },
+  "devDependencies": {
+    "@berun/dev-scripts": "^2.0.25",
+    "fuse-box": "3.7.1"
+  }
+}

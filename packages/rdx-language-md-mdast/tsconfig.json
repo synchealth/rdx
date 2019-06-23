@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "./dist/",
+    "rootDir": "src",
+    "lib": ["esnext"],
+    "sourceMap": true,
+    "declaration": true,
+    "baseUrl": ".",
+    "types": ["@types/node", "@types/unist"]
+  },
+  "include": ["src"],
+  "exclude": ["dist"]
+}

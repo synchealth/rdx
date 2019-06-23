@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "outDir": "./dist/",
+    "rootDir": "src",
+    "types": ["@types/node"],
+    "lib": ["esnext"],
+    "declaration": true
+  },
+  "include": [
+    "src",
+    "../reactive-cards-util/escape-string.ts",
+    "../reactive-cards-util/render-to-object.ts",
+    "../reactive-cards-util/createFromObject.ts",
+    "../reactive-cards-util/hastToJsxString.ts"
+  ],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@rdx-js/language-mdast-hast",
+  "scripts": {
+    "build": "tsc",
+    "lint": "berun-dev lint"
+  },
+  "main": "dist/",
+  "typings": "dist/",
+  "authors": [
+    "Tinia Labs",
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
+  "description": "Convert RDX AST to HAST",
+  "version": "0.5.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "mdurl": "^1.0.1",
+    "detab": "^2.0.2",
+    "collapse-white-space": "^1.0.5",
+    "trim-lines": "^1.1.2",
+    "unist-builder": "^1.0.4",
+    "unist-util-position": "^3.0.3",
+    "trim": "0.0.1",
+    "mdast-util-definitions": "^1.2.4",
+    "unist-util-generated": "^1.1.4",
+    "unist-util-visit": "^1.4.1",
+    "xtend": "^4.0.1"
+  },
+  "devDependencies": {
+    "@berun/dev-scripts": "^2.0.25"
+  },
+  "keywords": [
+    "markdown",
+    "react",
+    "remark",
+    "rdx",
+    "rdxast"
+  ],
+  "license": "MIT"
+}

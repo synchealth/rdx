@@ -1,0 +1,29 @@
+{
+  "name": "reactive-cards-util",
+  "version": "0.5.0",
+  "main": "src/index.ts",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "berun-scripts lint"
+  },
+  "authors": [
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "rehype-format": "^2.3.1"
+  },
+  "devDependencies": {
+    "@berun/dev-scripts": "^2.0.25",
+    "hastscript": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "license": "MIT"
+}
