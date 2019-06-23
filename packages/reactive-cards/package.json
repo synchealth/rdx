@@ -1,6 +1,6 @@
 {
   "name": "reactive-cards",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Renders JSX components to Adaptive Card JSON on the server and in the browser.",
   "main": "src/index.ts",
   "types": "types/index.d.ts",
@@ -29,7 +29,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {},
   "license": "MIT",
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25"

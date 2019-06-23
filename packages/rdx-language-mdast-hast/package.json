@@ -12,7 +12,7 @@
     "Internet of Protocols Association"
   ],
   "description": "Convert RDX AST to HAST",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
@@ -21,15 +21,15 @@
     "access": "public"
   },
   "dependencies": {
-    "mdurl": "^1.0.1",
-    "detab": "^2.0.2",
     "collapse-white-space": "^1.0.5",
+    "detab": "^2.0.2",
+    "mdast-util-definitions": "^1.2.4",
+    "mdurl": "^1.0.1",
+    "trim": "0.0.1",
     "trim-lines": "^1.1.2",
     "unist-builder": "^1.0.4",
-    "unist-util-position": "^3.0.3",
-    "trim": "0.0.1",
-    "mdast-util-definitions": "^1.2.4",
     "unist-util-generated": "^1.1.4",
+    "unist-util-position": "^3.0.3",
     "unist-util-visit": "^1.4.1",
     "xtend": "^4.0.1"
   },

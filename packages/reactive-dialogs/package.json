@@ -1,6 +1,6 @@
 {
   "name": "reactive-dialogs",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Renders interactive dialog based JSX components to Reactive Card JSON on the server and in the browser.",
   "main": "src/index.ts",
   "types": "types/index.d.ts",
@@ -29,7 +29,6 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
   },
-  "dependencies": {},
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25"
   },

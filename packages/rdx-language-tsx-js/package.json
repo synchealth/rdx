@@ -1,7 +1,7 @@
 {
   "name": "@rdx-js/language-tsx-js",
   "description": "Reactive Dialog Language Transpilers",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "scripts": {
     "build": "rollup -c",
     "lint": "berun-scripts lint"
@@ -22,18 +22,18 @@
   ],
   "preview": true,
   "dependencies": {
-    "sucrase": "^3.10.1",
-    "@rdx-js/rdx": "^0.5.0"
+    "@rdx-js/rdx": "^0.5.1",
+    "sucrase": "^3.10.1"
   },
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25",
+    "@betit/rollup-plugin-rename-extensions": "^0.0.4",
     "rollup": "1.16.2",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "10.0.0",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "5.0.4",
-    "@betit/rollup-plugin-rename-extensions": "^0.0.4",
-    "rollup-plugin-terser": "^5.0.0",
-    "rollup-plugin-json": "^4.0.0"
+    "rollup-plugin-terser": "^5.0.0"
   },
   "authors": [
     "Tinia Labs",
