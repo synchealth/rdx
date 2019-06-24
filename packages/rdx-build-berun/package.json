@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-berun",
-  "version": "0.5.1",
+  "version": "0.5.3",
   "description": "BeRun runner for building RDX packs",
   "scripts": {
     "lint": "berun-dev lint"
@@ -43,7 +43,7 @@
     "@rdx-js/build-webpack-loader": "^0.5.1",
     "@rdx-js/rdx": "^0.5.1",
     "character-parser": "^3.1.0",
-    "reactive-dialogs": "^0.5.1",
+    "reactive-dialogs": "^0.5.3",
     "remark-emoji": "^2.0.2",
     "remark-images": "^0.18.0"
   },
