@@ -2,7 +2,7 @@
   "name": "reactive-cards",
   "version": "0.5.1",
   "description": "Renders JSX components to Adaptive Card JSON on the server and in the browser.",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "build": "tsc",
