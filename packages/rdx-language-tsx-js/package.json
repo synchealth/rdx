@@ -1,7 +1,7 @@
 {
   "name": "@rdx-js/language-tsx-js",
   "description": "Reactive Dialog Language Transpilers",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "scripts": {
     "build": "rollup -c",
     "lint": "berun-scripts lint"
