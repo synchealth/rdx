@@ -6,8 +6,8 @@
     "build": "rollup -c",
     "lint": "berun-scripts lint"
   },
-  "main": "dist/",
-  "typings": "dist/",
+  "main": "dist/transpile.js",
+  "typings": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
