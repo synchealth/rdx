@@ -1,4 +1,4 @@
-import { default as rcast2ac } from '../../reactive-cards/src/render-to-object'
+import { render as rcast2ac } from 'reactive-cards'
 import { jsx2rcast } from '../src/jsx2rcast'
 
 const jsx = `<card version="1.0">

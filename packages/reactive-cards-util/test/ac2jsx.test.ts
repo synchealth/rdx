@@ -1,4 +1,4 @@
-import { default as createFromObject } from '../../reactive-cards/src/create-from-object'
+import { createFromObject } from 'reactive-cards'
 import { rcast2rhast } from '../src/rcast2rhast'
 import { rhast2jsx } from '../src/rhast2jsx'
 

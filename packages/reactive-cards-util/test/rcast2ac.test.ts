@@ -1,5 +1,5 @@
 import { rcast2ac } from '../src'
-import { default as h } from '../../reactive-cards/src/create-element'
+import { h } from 'reactive-cards'
 
 const rcast = h(
   'card',

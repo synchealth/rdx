@@ -11,13 +11,10 @@ function escapeChar(char) {
   return ESCAPE_MAP[char]
 }
 
-function escapeString(value) {
+export default function escapeString(value) {
   if (!ESCAPE_REGEXP.test(value)) {
     return value
   }
 
   return String(value).replace(ESCAPE_REGEXP, escapeChar)
 }
-
-module.exports = escapeString
-exports.default = escapeString
