@@ -1,4 +1,4 @@
-import { createFromObject } from '../src'
+import { createFromObject, renderToObject } from '../src/index'
 
 const item = {
   speak: "Tom's Pie is a Pizza restaurant which is rated 9.3 by customers.",
@@ -61,7 +61,12 @@ const item = {
   $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
   version: '1.0'
 }
-
+ 
 const result = createFromObject(item, null)
 
 console.log(JSON.stringify(result, null, 2))
+
+const itemOutput = renderToObject(result)
+
+console.log(JSON.stringify(itemOutput, null, 2))
+ 

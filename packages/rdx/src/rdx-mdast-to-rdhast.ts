@@ -325,6 +325,25 @@ export default function toRDHast() {
         }, {})
 
         return u('yaml', { properties: props })
+      },
+
+      /** pass through tables as is */
+      table(h, node) {
+        return Object.assign({}, node, {
+          type: 'table'
+        })
+      },
+
+      tableRow(h, node) {
+        return Object.assign({}, node, {
+          type: 'tableRow'
+        })
+      },
+
+      tableCell(h, node) {
+        return Object.assign({}, node, {
+          type: 'tableCell'
+        })
       }
     }
 

@@ -25,7 +25,7 @@ export const RDXMemeCard: ReactiveCards.FC<{ title?: string }> = ({
   // TO DO SWITCH TO BLEED CONTAINER AND FOREGROUND IMAGE WITH ADAPTIVE CARDS 1.2+
 
   return (
-    <card minHeight="300px" backgroundImage={images[0]} version="1.0">
+    <card minHeight="300px" backgroundImage={images[0]} version="1.2" style="default">
       <body>
         <container>
           <text

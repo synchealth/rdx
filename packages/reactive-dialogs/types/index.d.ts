@@ -1,7 +1,6 @@
 export = ReactiveDialogs
 export as namespace ReactiveDialogs
 import * as ReactiveCards from 'reactive-cards'
-import { Iopa } from '@karla/types'
 
 declare namespace ReactiveDialogs {
   export function h(
@@ -98,6 +97,16 @@ declare namespace ReactiveDialogs {
     'flow'
   >
 
+  export type TableElement = Element<
+  JSX.table & { children: ListElement[] },
+  'table'
+  >
+
+  export type ListElement = Element<
+  JSX.list & { children: string[] },
+  'list'
+  >
+
   // Reactive HAST -- with type: element and tagname and isolated children
   // Identical to HAST (see unifiedjs) but with addition RHastCode type
 
@@ -187,6 +196,12 @@ declare global {
       MultiChoiceCard: card
       /** Simpler type of reactive card for text and buttons */
       ImageCard: card
+
+      /** Root element in a Reactive Dialogs Table Set  */
+      table: table
+      /** Set of columnar data in a table  */
+      list: list
+
     }
 
     /** Root element in a Reactive Dialogs Skill Flow  */
@@ -202,6 +217,20 @@ declare global {
       /** register launch utterances on default skill even if not a global flow */
       canLaunchFromGlobal?: boolean
       //  children must include dialog elements
+    }
+
+    /** Root element in a Reactive Dialogs Table Set  */
+    export interface table {
+      /** unique short name of the flow */
+      id: string
+      /** semantic version of the flow interaction model, e.g., 1.2.0 */
+      version: string
+    }
+
+    /** Set of columnar data in a table   */
+    export interface list {
+      /** unique short name of the list */
+      id: string
     }
 
     /** One or more sequence of text prompts, cards, and directive actionset in a multi-turn conversation  */

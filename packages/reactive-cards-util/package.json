@@ -1,6 +1,6 @@
 {
   "name": "reactive-cards-util",
-  "version": "0.5.4",
+  "version": "0.5.25",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -14,16 +14,17 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "rehype-format": "^2.3.1"
-  },
-  "devDependencies": {
-    "@berun/dev-scripts": "^2.0.25",
-    "hastscript": "^5.0.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "reactive-cards": "^0.5.25",
+    "rehype-format": "^2.3.2"
+  },
+  "devDependencies": {
+    "@berun/dev-scripts": "^2.0.25",
+    "hastscript": "^5.1.0"
+  }
 }

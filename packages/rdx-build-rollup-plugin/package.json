@@ -1,12 +1,12 @@
 {
   "name": "@rdx-js/build-rollup-plugin",
-  "version": "0.5.1",
+  "version": "0.5.25",
   "scripts": {
     "build": "tsc",
     "lint": "berun-dev lint"
   },
-  "main": "dist/",
-  "typings": "dist/",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
@@ -29,11 +29,16 @@
     "Sync Health Labs <labs@noreply.sync.health>",
     "Internet of Protocols Association"
   ],
-  "dependencies": {
-    "@rdx-js/rdx": "^0.5.1",
-    "rollup-pluginutils": "^2.7.1"
-  },
   "license": "MIT",
+  "dependencies": {
+    "@betit/rollup-plugin-rename-extensions": "^0.0.4",
+    "@rdx-js/rdx": "^0.5.25",
+    "matched": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sucrase": "^2.1.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-pluginutils": "^2.8.1"
+  },
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25"
   }

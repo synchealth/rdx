@@ -21,14 +21,11 @@ declare namespace ReactiveCards {
     props: any
   }
 
-  function renderToObject(element: any): IAdaptiveCard
-  function render(element: any): IAdaptiveCard
+  function renderToObject(element: any, resourceRoot?: string): IAdaptiveCard
+  function render(element: any, resourceRoot?: string): IAdaptiveCard
   function createFromObject(element: any): Element
-
-  export const config: {
-    localResourceRoot: string | null
-  }
-
+  function setLocalResourceProtocolMapper(mapper: (partial_url: string) => string): void
+ 
   function toArray(
     x: any
   ): {
@@ -221,6 +218,8 @@ declare namespace ReactiveCards {
     verticalContentAlignment?: VerticalAlignment
     selectAction?: IAction
     items?: ICardElement[]
+    bleed?: boolean
+    minHeight?: string | number
   }
 
   export interface IColumn extends ICardElement {
@@ -333,6 +332,8 @@ declare namespace ReactiveCards {
       | IColumnSet
       | IContainer)[]
     actions?: (ISubmitAction | IOpenUrlAction | IShowCardAction)[]
+    style?: ContainerStyle
+    minHeight?: string | number
     speak?: string
   }
 }
@@ -392,6 +393,10 @@ declare global {
       backgroundImage?: string
       /** he 2-letter ISO-639-1 language used in the card. Used to localize any date/time functions. */
       lang?: string
+      /** Style hint for the Card */
+      style?: 'default' | 'emphasis'
+      /** Specifies the minimum height of the card. */
+      minHeight?: string
 
       [key: string]: any
     }
@@ -506,6 +511,12 @@ declare global {
     export interface container extends cardelement {
       style?: 'default' | 'emphasis'
       verticalContentAlignment?: 'top' | 'center' | 'bottom'
+      /** Determines whether the element should bleed through its parent’s padding */
+      bleed?: boolean
+      /** Specifies the background image  */
+      backgroundImage?: string
+      /** Specifies the minimum height of the container in pixels, like "80px" */
+      minHeight?: string
       [k: string]: any
     }
     /** Describes a Fact in a FactSet as a key/value pair. */

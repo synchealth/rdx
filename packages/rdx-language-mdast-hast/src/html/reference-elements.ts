@@ -1,4 +1,4 @@
-import { all, revert, H } from '../'
+import { all, revert, H } from '../index'
 import mdurlEncode from 'mdurl/encode'
 import u from 'unist-builder'
 import * as MDAST from 'mdast'

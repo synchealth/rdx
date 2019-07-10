@@ -60,7 +60,8 @@ export const RDXCard: ReactiveCards.FC<{ title?: string }> = ({
   return (
     <card
       $schema="http://adaptivecards.io/schemas/adaptive-card.json"
-      version="1.0"
+      version="1.2"
+      style="default"
     >
       <body>
         {title && (
