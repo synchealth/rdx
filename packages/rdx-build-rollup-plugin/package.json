@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-rollup-plugin",
-  "version": "0.5.25",
+  "version": "0.5.26",
   "scripts": {
     "build": "tsc",
     "lint": "berun-dev lint"
@@ -32,7 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "@betit/rollup-plugin-rename-extensions": "^0.0.4",
-    "@rdx-js/rdx": "^0.5.25",
+    "@rdx-js/rdx": "^0.5.26",
     "matched": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-sucrase": "^2.1.0",

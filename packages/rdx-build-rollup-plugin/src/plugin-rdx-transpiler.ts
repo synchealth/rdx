@@ -19,8 +19,6 @@ export default function rdxTranspiler(options: any = {}) {
 
       const result = rdxSync(code, {})
 
-      console.log(result)
-
       return {
         code: result,
         map: { mappings: '' }

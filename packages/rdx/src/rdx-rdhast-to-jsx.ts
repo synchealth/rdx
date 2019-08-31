@@ -103,10 +103,8 @@ export function toJSX(
       .map(childNode => toJSX(childNode, node))
       .join('\n')
 
-    console.log(jsxNodes.length, jsxNodes)
-
     const fn =
-      (jsxNodes.length <= 3 && jsxNodes[jsxNodes.length - 1].type == 'table') ||
+      (jsxNodes.length <= 3 && jsxNodes[jsxNodes.length - 1] && jsxNodes[jsxNodes.length - 1].type == 'table') ||
       (jsxNodes.length == 4 && jsxNodes[jsxNodes.length - 2].type == 'table')
         ? `(props) => {
           return (

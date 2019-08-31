@@ -1,7 +1,7 @@
 {
   "name": "@rdx-js/language-tsx-js",
   "description": "Reactive Dialog Language Transpilers",
-  "version": "0.5.25",
+  "version": "0.5.26",
   "scripts": {
     "build": "rollup -c",
     "lint": "berun-scripts lint"
@@ -31,6 +31,7 @@
     "@babel/plugin-transform-typescript": "^7.5.5",
     "@berun/dev-scripts": "^2.0.25",
     "@betit/rollup-plugin-rename-extensions": "^0.0.4",
+    "@rdx-js/rdx": "^0.5.26",
     "rollup": "^1.20.3",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",

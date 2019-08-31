@@ -41,6 +41,6 @@ export default {
       extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx']
     }),
     commonjs(),
-    terser()
+   // terser()
   ]
 }
