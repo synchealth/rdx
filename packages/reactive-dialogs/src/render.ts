@@ -54,8 +54,6 @@ export default function render(element, _parent?: any): any {
 
       if (prop === 'children' || prop === 'key' || prop === 'ref') {
         // ignore
-      } else if (prop === 'style') {
-        // for future use if we have a css in js simulation
       } else {
         result.props[prop] = value
       }

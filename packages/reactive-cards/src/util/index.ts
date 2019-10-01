@@ -1,5 +1,5 @@
 export function toAbsoluteUrl(relative: string, base: string) {
-  var stack = base.split('/'),
+  var stack = base.replace(/\/$/, '').split('/'),
     parts = relative.split('/')
 
   if (parts[0] == 'local') {

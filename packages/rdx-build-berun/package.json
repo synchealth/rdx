@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-berun",
-  "version": "0.5.4",
+  "version": "0.5.26",
   "description": "BeRun runner for building RDX packs",
   "scripts": {
     "lint": "berun-dev lint"
@@ -36,23 +36,19 @@
   "publishConfig": {
     "access": "public"
   },
+  "resolutions": {
+    "babel-core": "^7.0.0-bridge.0"
+  },
   "dependencies": {
     "@berun/fluent": "^2.2.2",
     "@berun/fuse-box-plugin-babel": "^3.5.21",
-    "@rdx-js/build-fuse-box-plugin": "^0.5.1",
-    "@rdx-js/build-webpack-loader": "^0.5.1",
-    "@rdx-js/rdx": "^0.5.1",
-    "character-parser": "^3.1.0",
-    "reactive-dialogs": "^0.5.4",
+    "@berun/runner-babel": "^2.2.3",
+    "@rdx-js/build-fuse-box-plugin": "^0.5.26",
     "remark-emoji": "^2.0.2",
-    "remark-images": "^0.18.0"
+    "remark-images": "^1.0.0"
   },
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25",
     "@berun/preset-react": "^2.2.12"
-  },
-  "resolutions": {
-    "babel-core": "^7.0.0-bridge.0"
-  },
-  "gitHead": "c7282d0cc1ad3405ea4cca16286f1517c7be9dfb"
+  }
 }

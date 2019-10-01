@@ -1,4 +1,4 @@
-import { H, wrap, all } from '../'
+import { H, wrap, all } from '../index'
 import u from 'unist-builder'
 import * as HAST from 'hast-format'
 import * as MDAST from 'mdast'

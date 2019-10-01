@@ -5,6 +5,8 @@ import {
   heirarchyObjectFlip,
   ATTR_ALIASES,
   CHILDREN_PROPS,
+  CHILDREN_TEXT_PROPS,
+  CHILDREN_CONTAINER_PROPS,
   CLASS_ALIASES,
   PROMOTE_ALIASES,
   SPLIT_ALIASES,
@@ -15,6 +17,8 @@ const CLASS_ALIASES_FLIPPED = objectFlip(CLASS_ALIASES)
 const ATTR_ALIASES_FLIPPED = objectFlip(ATTR_ALIASES)
 const PROMOTE_ALIASES_FLIPPED = categoryObjectFlip(PROMOTE_ALIASES)
 const CHILDREN_PROPS_FLIPPED = objectFlip(CHILDREN_PROPS)
+const CHILDREN_TEXT_PROPS_FLIPPED = objectFlip(CHILDREN_TEXT_PROPS)
+const CHILDREN_CONTAINER_PROPS_FLIPPED = objectFlip(CHILDREN_CONTAINER_PROPS)
 const SPLIT_ALIASES_FLIPPED = heirarchyObjectFlip(SPLIT_ALIASES)
 
 function createFromObject(element, _parent) {
@@ -54,9 +58,10 @@ function createFromObject(element, _parent) {
 
     if (type in SPLIT_ALIASES_FLIPPED) {
       const { type: new_type, subtype } = SPLIT_ALIASES_FLIPPED[type]
+      const new_element = { ...element, type: new_type }
+      const result = createFromObject(new_element, _parent)
       result.type = new_type
       result.props.type = subtype
-      result.props = { ...element, type: subtype }
       return result
     }
 
@@ -65,8 +70,19 @@ function createFromObject(element, _parent) {
       } else {
         if (key in CHILDREN_PROPS_FLIPPED) {
           const new_children = createFromObject(element[key], element)
-          result.props.children = result.props.children.concat(new_children)
-        } else if (
+          result.props.children = result.props.children.concat( new_children ) 
+        } else if (key in CHILDREN_TEXT_PROPS_FLIPPED) {
+          const new_children = createFromObject(element[key], element)
+          result.props.children = result.props.children.concat( new_children ) 
+        } else if (key in CHILDREN_CONTAINER_PROPS_FLIPPED) {
+          const new_children = createFromObject(element[key], element)
+
+          result.props.children = result.props.children.concat({
+           type: CHILDREN_CONTAINER_PROPS_FLIPPED[key],
+           props: { children: new_children }
+          })
+          
+        }  else if (
           type in PROMOTE_ALIASES_FLIPPED &&
           key in PROMOTE_ALIASES_FLIPPED[type]
         ) {

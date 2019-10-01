@@ -92,8 +92,8 @@ export default function toRDHast() {
           parent.type == 'root'
             ? 'actionset'
             : parent.type == 'listItem'
-            ? 'utterances'
-            : null
+              ? 'utterances'
+              : null
 
         if (typeof node.start === 'number' && node.start !== 1) {
           props.start = node.start
@@ -179,7 +179,13 @@ export default function toRDHast() {
       },
 
       /** convert links to actions */
-      link(h: H, node: MDAST.Link & Node) {
+      link(h: H, node: MDAST.Link & Node, parent: Parent) {
+
+        if (parent.children.length > 1 && (parent.children[0].type == 'text' || parent.children[parent.children.length - 1].type == 'text')) {
+          const title = node.title || allText(h, node).join(' ')
+          return h.augment(node, u('text', `[${title}](${node.url})`))
+        }
+
         var props: HAST.Properties = {
           url: mdurlEncode(node.url),
           type: 'openurl'
@@ -325,6 +331,25 @@ export default function toRDHast() {
         }, {})
 
         return u('yaml', { properties: props })
+      },
+
+      /** pass through tables as is */
+      table(h, node) {
+        return Object.assign({}, node, {
+          type: 'table'
+        })
+      },
+
+      tableRow(h, node) {
+        return Object.assign({}, node, {
+          type: 'tableRow'
+        })
+      },
+
+      tableCell(h, node) {
+        return Object.assign({}, node, {
+          type: 'tableCell'
+        })
       }
     }
 

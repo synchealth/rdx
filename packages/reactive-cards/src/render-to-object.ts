@@ -2,18 +2,25 @@ const { Fragment } = require('./fragment') // important must use commonjs requir
 import {
   ATTR_ALIASES,
   CHILDREN_PROPS,
+  CHILDREN_TEXT_PROPS,
   CLASS_ALIASES,
   PROMOTE_ALIASES,
   SPLIT_ALIASES
 } from './util/constants'
 const EMPTY_OBJECT = Object.freeze({})
 import { toArray } from './util/children'
-import { config } from './'
 import { toAbsoluteUrl } from './util'
+declare const document: any;
 
 const AbsoluteRegExp = new RegExp('^(?:[a-z]+:)', 'i')
 
-function renderToObject(element, _parent?: any) {
+var localResourceProtocolMapper: (partial_url: string) => string | null = null
+
+export function setLocalResourceProtocolMapper(mapper: (partial_url: string) => string) {
+  localResourceProtocolMapper = mapper
+}
+
+function renderToObject(element, resourceRoot?: string, _parent?: any) {
   if (
     element == null ||
     typeof element === 'string' ||
@@ -26,7 +33,7 @@ function renderToObject(element, _parent?: any) {
     let result: any[] = []
 
     for (let i = 0, len = element.length; i < len; i++) {
-      const item = renderToObject(element[i], element)
+      const item = renderToObject(element[i], resourceRoot, element)
       if (item) {
         result.push(item)
       }
@@ -42,20 +49,34 @@ function renderToObject(element, _parent?: any) {
 
     if (
       type == 'image' &&
-      config.localResourceRoot &&
+      props.url &&
+      global.process && (global.process.platform == "darwin" || global.process.platform == "android")
+      // running on mobile or non html based browser 
+      // https://github.com/microsoft/AdaptiveCards/issues/777
+    ) {
+      props.url = props.url.replace(/\.svg$/, '.png')
+      console.log(`SVG not supported on mobile. Converted to ${props.url}`)
+    }
+
+    if (
+      type == 'image' &&
+      localResourceProtocolMapper &&
       !AbsoluteRegExp.test(props.url)
     ) {
-      props.url = toAbsoluteUrl(props.url, config.localResourceRoot)
+      props.url = toAbsoluteUrl(
+        props.url,
+        localResourceProtocolMapper(resourceRoot || '')
+      )
     }
 
     if (
       props.backgroundImage &&
-      config.localResourceRoot &&
+      localResourceProtocolMapper &&
       !AbsoluteRegExp.test(props.backgroundImage)
     ) {
       props.backgroundImage = toAbsoluteUrl(
         props.backgroundImage,
-        config.localResourceRoot
+        localResourceProtocolMapper(resourceRoot || '')
       )
     }
 
@@ -69,6 +90,10 @@ function renderToObject(element, _parent?: any) {
       props.data = props.children.join(' ')
     }
 
+    if (type == 'action') {
+      props.style = props.style /** uncomment to default to "positive" if needed: || 'positive' */
+    }
+
     for (const prop in props) {
       if (prop.startsWith('__')) {
         delete props[prop]
@@ -76,9 +101,9 @@ function renderToObject(element, _parent?: any) {
     }
 
     if (typeof type === 'function') {
-      return renderToObject(type(props), element)
+      return renderToObject(type(props), resourceRoot, element)
     } else if (type === Fragment) {
-      return renderToObject(props.children, element)
+      return renderToObject(props.children, resourceRoot, element)
     } else if (typeof type === 'string') {
       let result: any = {}
 
@@ -95,8 +120,7 @@ function renderToObject(element, _parent?: any) {
           )
 
           promote.forEach((child, i) => {
-            const childresult = renderToObject(child.props.children, element)
-
+            const childresult = renderToObject(child.props.children, resourceRoot, element)
             result[MY_PROMOTE_ALIASES[child.type]] =
               childresult.length == 1 && typeof childresult[0] !== 'object'
                 ? childresult[0]
@@ -105,7 +129,7 @@ function renderToObject(element, _parent?: any) {
         }
       }
 
-      children = renderToObject(children, element)
+      children = renderToObject(children, resourceRoot, element)
 
       let new_type = type
 
@@ -116,7 +140,7 @@ function renderToObject(element, _parent?: any) {
       }
 
       if (children.length > 0 && type in CHILDREN_PROPS) {
-        const firstchild = type == 'text' ? children.join('') : children[0]
+        const firstchild = children[0]
 
         if (typeof firstchild == null) {
           children = []
@@ -129,6 +153,22 @@ function renderToObject(element, _parent?: any) {
         }
 
         result[CHILDREN_PROPS[type]] = toArray(children)
+
+      } else if (children.length > 0 && type in CHILDREN_TEXT_PROPS) {
+        const firstchild = children.join('')
+
+        if (typeof firstchild == null) {
+          children = ''
+        } else if (
+          typeof firstchild === 'string' ||
+          typeof firstchild === 'number' ||
+          typeof firstchild === 'boolean'
+        ) {
+          children = firstchild
+        }
+
+        result[CHILDREN_TEXT_PROPS[type]] = children
+
       } else if (children.length == 1) {
         const firstchild = children[0]
 
@@ -160,8 +200,6 @@ function renderToObject(element, _parent?: any) {
           prop === 'ref'
         ) {
           // ignore
-        } else if (prop === 'style') {
-          // for future use if we have a css in js simulation
         } else {
           const name = ATTR_ALIASES[prop] || prop
           result[name] = value

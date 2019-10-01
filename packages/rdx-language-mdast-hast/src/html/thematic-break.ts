@@ -1,4 +1,4 @@
-import { H } from '../'
+import { H } from '../index'
 import { Node } from 'unist'
 import * as HAST from 'hast-format'
 import * as MDAST from 'mdast'

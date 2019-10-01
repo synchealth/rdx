@@ -26,8 +26,7 @@ export const PROMOTE_ALIASES = {
     body: 'body',
     actionset: 'actions',
     speak: 'speak',
-    fallback: 'fallback',
-    action: 'selectAction'
+    fallback: 'fallback'
   },
   image: {
     action: 'selectAction'
@@ -44,17 +43,23 @@ export const PROMOTE_ALIASES = {
 }
 
 export const CHILDREN_PROPS = {
-  action: 'title',
-  text: 'text',
   container: 'items',
   columnset: 'columns',
   column: 'items',
   factset: 'facts',
   imageset: 'images',
-  choiceset: 'choices',
-  choice: 'title',
-  actionset: 'actions'
+  choiceset: 'choices'
   //  input: "actionset"
+}
+
+export const CHILDREN_TEXT_PROPS = {
+  action: 'title',
+  text: 'text',
+  choice: 'title'
+}
+
+export const CHILDREN_CONTAINER_PROPS = {
+  actionset: 'actions'
 }
 
 export const SPLIT_ALIASES = {
@@ -87,7 +92,8 @@ export const CASE_INSENSITIVE = {
 export const DEFAULTS = {
   card: {
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-    version: '1.1'
+    version: '1.2',
+    style: 'default'
   }
 }
 
