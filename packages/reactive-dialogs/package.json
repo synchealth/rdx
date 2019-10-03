@@ -1,6 +1,6 @@
 {
   "name": "reactive-dialogs",
-  "version": "0.5.26",
+  "version": "0.5.27",
   "description": "Renders interactive dialog based JSX components to Reactive Card JSON on the server and in the browser.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -31,9 +31,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "reactive-cards": "^0.5.26"
+    "reactive-cards": "0.5.27"
   },
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25"
-  }
+  },
+  "peerDependencies": {}
 }

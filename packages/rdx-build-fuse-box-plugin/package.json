@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-fuse-box-plugin",
-  "version": "0.5.26",
+  "version": "0.5.27",
   "scripts": {
     "build": "tsc",
     "lint": "berun-dev lint"
@@ -31,10 +31,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@rdx-js/rdx": "^0.5.26"
+    "@rdx-js/rdx": "0.5.27"
   },
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25",
     "fuse-box": "3.7.1"
-  }
+  },
+  "peerDependencies": {}
 }

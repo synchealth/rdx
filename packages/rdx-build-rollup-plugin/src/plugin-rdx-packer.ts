@@ -3,7 +3,8 @@ import matched from 'matched'
 declare const require: any, process: any;
 
 const path = require('path')
-const entry = path.resolve(process.cwd(), './src/index.js');
+const cwd = process.cwd();
+const entry = path.resolve(cwd, './src/index.js');
 const { name } = require(path.resolve(process.cwd(), './package.json'))
 
 export default function rdxPacker() {
@@ -54,7 +55,7 @@ export default function rdxPacker() {
     },
 
     load(id) {
-      console.log(id)
+      console.log(path.relative(cwd, id))
       if (id === entry) {
         if (!include.length) {
           return Promise.resolve('');
@@ -64,7 +65,6 @@ export default function rdxPacker() {
           return '!' + pattern;
         }));
 
-        console.log(patterns)
         return matched.promise(patterns, {
           realpath: true
         }).then(function (paths) {
@@ -83,8 +83,6 @@ export function usePack(app) {
 }
 
 export default usePack`
-
-          console.log(result)
 
           return result
         });

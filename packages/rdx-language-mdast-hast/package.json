@@ -12,7 +12,7 @@
     "Internet of Protocols Association"
   ],
   "description": "Convert RDX AST to HAST",
-  "version": "0.5.26",
+  "version": "0.5.27",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
@@ -39,5 +39,6 @@
   },
   "devDependencies": {
     "@berun/dev-scripts": "^2.0.25"
-  }
+  },
+  "peerDependencies": {}
 }

@@ -1,7 +1,7 @@
 {
   "name": "@rdx-js/language-tsx-js",
   "description": "Reactive Dialog Language Transpilers",
-  "version": "0.5.26",
+  "version": "0.5.27",
   "scripts": {
     "build": "rollup -c",
     "lint": "berun-scripts lint"
@@ -26,17 +26,19 @@
     "Sync Health Labs <labs@noreply.sync.health>",
     "Internet of Protocols Association"
   ],
+  "dependencies": {},
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
-    "@babel/plugin-transform-typescript": "^7.5.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/plugin-transform-typescript": "^7.6.0",
     "@berun/dev-scripts": "^2.0.25",
     "@betit/rollup-plugin-rename-extensions": "^0.0.4",
-    "@rdx-js/rdx": "^0.5.26",
-    "rollup": "^1.20.3",
+    "@rdx-js/rdx": "0.5.27",
+    "rollup": "^1.22.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.1"
-  }
+    "rollup-plugin-terser": "^5.1.2"
+  },
+  "peerDependencies": {}
 }
