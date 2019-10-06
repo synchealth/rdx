@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-rollup-plugin",
-  "version": "0.5.27",
+  "version": "0.5.28",
   "scripts": {
     "build": "tsc",
     "lint": "berun-dev lint"

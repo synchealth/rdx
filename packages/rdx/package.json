@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/rdx",
-  "version": "0.5.27",
+  "version": "0.5.28",
   "description": "Parse RDX Markdown and transpile to Reactive Dialogs JSX",
   "scripts": {
     "build": "tsc",

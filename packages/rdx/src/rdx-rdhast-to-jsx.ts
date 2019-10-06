@@ -6,6 +6,9 @@ export const toTemplateLiteral = text => {
   const escaped = text
     .replace(/\\/g, '\\\\') // Escape all "\" to avoid unwanted escaping in text nodes
     .replace(/`/g, '\\`') // Escape "`"" since
+    .replace(/[‘’]/g, "'") // Flatten curly single quotes
+    .replace(/[“”]/g, '"') // Flatten curly double quotes
+    .replace(/[^\x00-\x7F]+/g, '') // Remove all non-ascii characters
     .replace(/\$\{/g, '\\${') // Escape ${} in text so that it doesn't eval
 
   return '{`' + escaped + '`}'

@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-fuse-box-plugin",
-  "version": "0.5.27",
+  "version": "0.5.28",
   "scripts": {
     "build": "tsc",
     "lint": "berun-dev lint"
