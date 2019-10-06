@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/language-md-mdast",
-  "version": "0.5.28",
+  "version": "0.5.30",
   "description": "Convert RDX Markdown to Unist Markdown AST (MDAST)",
   "scripts": {
     "build": "tsc",

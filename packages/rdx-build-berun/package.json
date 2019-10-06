@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-berun",
-  "version": "0.5.28",
+  "version": "0.5.30",
   "description": "BeRun runner for building RDX packs",
   "scripts": {
     "lint": "berun-dev lint"
@@ -43,7 +43,7 @@
     "@berun/fluent": "^2.2.2",
     "@berun/fuse-box-plugin-babel": "^3.5.21",
     "@berun/runner-babel": "^2.2.3",
-    "@rdx-js/build-fuse-box-plugin": "0.5.27",
+    "@rdx-js/build-fuse-box-plugin": "0.5.30",
     "remark-emoji": "^2.0.2",
     "remark-images": "^1.0.0"
   },
