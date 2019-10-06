@@ -7,4 +7,4 @@ import render from './render'
 
 export { Fragment, h, h as createElement, cloneElement, render, Children }
 
-export { RDXCard, RDXImageCard, RDXMemeCard, RDXQuoteCard } from './cards/index'
+export { RDXCard, RDXImageCard, RDXMemeCard, RDXQuoteCard, RDXTableCard } from './cards/index'

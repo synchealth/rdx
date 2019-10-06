@@ -5,7 +5,7 @@ declare const require: any, process: any;
 const path = require('path')
 const cwd = process.cwd();
 const entry = path.resolve(cwd, './src/index.js');
-const { name } = require(path.resolve(process.cwd(), './package.json'))
+const { name, version } = require(path.resolve(process.cwd(), './package.json'))
 
 export default function rdxPacker() {
   var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -75,6 +75,8 @@ ${paths.map(exporter).join(',\n')}
 }
 
 export function usePack(app) {
+    app.properties["rdx.Version"] = app.properties["rdx.Version"] || {};
+    app.properties["rdx.Version"]["${name}"] = "${version}";
     const reactivedialogs = app.reactivedialogs;
     Object.keys(pack).forEach(id => {
       pack[id].meta.nkar = "${name}.nkar"

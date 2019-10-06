@@ -27,12 +27,23 @@ declare namespace ReactiveDialogs {
 
   /** simpler version of reactive card with fewer options used for RDX documents */
   export const RDXCard: ReactiveCards.FC<{ title?: string }>
-  /** simpler version of reactive card with fewer options used for RDX documents */
+  /** RDX Image Card */
   export const RDXImageCard: ReactiveCards.FC<{
     src: string
     altText?: string
     title?: string
     footer?: string
+  }>
+  /** RDX Table Card with embedded fact set */
+  export const RDXTableCard: ReactiveCards.FC<{
+    title?: string,
+    subheading?: string,
+    footer?: string,
+    titleimage?: string,
+    image?: string,
+    fontType?: string
+    style?: any
+    data: [string, string][]
   }>
 
   export function toArray(
@@ -49,7 +60,7 @@ declare namespace ReactiveDialogs {
   export interface Element<
     P = any,
     T extends string | FunctionComponent<P> = string | FunctionComponent<P>
-  > {
+    > {
     type: T
     props: P
     key: string | number | null
@@ -58,7 +69,7 @@ declare namespace ReactiveDialogs {
   export interface CustomElement<
     P = any,
     T extends FunctionComponent<P> = FunctionComponent<P>
-  > {
+    > {
     type: T
     props: P
     key: string | number | null
@@ -98,13 +109,13 @@ declare namespace ReactiveDialogs {
   >
 
   export type TableElement = Element<
-  JSX.table & { children: ListElement[] },
-  'table'
+    JSX.table & { children: ListElement[] },
+    'table'
   >
 
   export type ListElement = Element<
-  JSX.list & { children: string[] },
-  'list'
+    JSX.list & { children: string[] },
+    'list'
   >
 
   // Reactive HAST -- with type: element and tagname and isolated children
@@ -135,7 +146,7 @@ declare namespace ReactiveDialogs {
 
   // Core Virtual dom of Reactive Cards
 
-  interface NodeArray extends Array<Node> {}
+  interface NodeArray extends Array<Node> { }
   type Child = Element | string | number
   type ElementFragment = {} | NodeArray
 
