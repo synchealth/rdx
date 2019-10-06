@@ -15,17 +15,17 @@ export const RDXCard: ReactiveCards.FC<{ title?: string }> = ({
     switch (child.type) {
       case 'text':
         const text = (
-          <text horizontalAlignment="Left" wrap>
+          <text horizontalAlignment="Left" height="stretch" wrap>
             {child.props.children.join(' ')}
           </text>
         )
         if (lastimage) {
           textimages.push(
-            <columnset key={i} spacing="medium">
+            <columnset key={i} >
               <column verticalContentAlignment="Center" width={1}>
                 {lastimage}
               </column>
-              <column spacing="medium" width={2}>
+              <column verticalContentAlignment="Center" width={2}>
                 {text}
               </column>
             </columnset>

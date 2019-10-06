@@ -43,14 +43,14 @@ export const RDXQuoteCard: ReactiveCards.FC<{ title?: string }> = ({
           <column verticalContentAlignment="Center" width={1}>
             {image}
           </column>
-          <column spacing="medium" width={2}>
+          <column verticalContentAlignment="Center" width={2}>
             {texts.map((text, i) => (
-              <text key={i} horizontalAlignment="Left" wrap>
+              <text key={i} height="stretch" horizontalAlignment="Left" wrap>
                 *&#8220;{text}&#8221;*
               </text>
             ))}
             {lastText && (
-              <text horizontalAlignment="Right" wrap>
+              <text height="stretch" horizontalAlignment="Right" wrap>
                 *&#8213; {lastText}*
               </text>
             )}

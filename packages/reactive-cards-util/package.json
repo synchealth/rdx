@@ -1,6 +1,6 @@
 {
   "name": "reactive-cards-util",
-  "version": "0.5.30",
+  "version": "0.5.31",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "reactive-cards": "0.5.30",
+    "reactive-cards": "0.5.31",
     "rehype-format": "^2.3.2"
   },
   "devDependencies": {
