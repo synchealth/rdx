@@ -489,7 +489,7 @@ declare global {
     }
     /** Defines a source for a Media element */
     export interface mediasource {
-      mimetype?: string
+      mimeType?: string
       url?: string
       [k: string]: any
     }

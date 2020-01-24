@@ -48,7 +48,8 @@ export const CHILDREN_PROPS = {
   column: 'items',
   factset: 'facts',
   imageset: 'images',
-  choiceset: 'choices'
+  choiceset: 'choices',
+  media: 'sources'
   //  input: "actionset"
 }
 
@@ -74,7 +75,9 @@ export const SPLIT_ALIASES = {
     number: 'Input.Number',
     text: 'Input.Text',
     toggle: 'Input.Toggle',
-    choiceset: 'Input.ChoiceSet'
+    choiceset: 'Input.ChoiceSet',
+    file: 'Input.File',
+    video: 'Input.Video'
   }
 }
 
