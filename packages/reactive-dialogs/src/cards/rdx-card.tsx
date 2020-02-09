@@ -21,7 +21,7 @@ export const RDXCard: ReactiveCards.FC<{ title?: string }> = ({
         )
         if (lastimage) {
           textimages.push(
-            <columnset key={i} >
+            <columnset key={i}>
               <column verticalContentAlignment="Center" width={1}>
                 {lastimage}
               </column>
@@ -50,6 +50,8 @@ export const RDXCard: ReactiveCards.FC<{ title?: string }> = ({
       case 'action':
         actions.push(child)
         break
+      default:
+      /** noop */
     }
   })
 

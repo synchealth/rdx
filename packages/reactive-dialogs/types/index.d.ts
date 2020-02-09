@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/class-name-casing */
+import * as ReactiveCards from 'reactive-cards'
+
 export = ReactiveDialogs
 export as namespace ReactiveDialogs
-import * as ReactiveCards from 'reactive-cards'
 
 declare namespace ReactiveDialogs {
   export function h(
@@ -36,11 +38,11 @@ declare namespace ReactiveDialogs {
   }>
   /** RDX Table Card with embedded fact set */
   export const RDXTableCard: ReactiveCards.FC<{
-    title?: string,
-    subheading?: string,
-    footer?: string,
-    titleimage?: string,
-    image?: string,
+    title?: string
+    subheading?: string
+    footer?: string
+    titleimage?: string
+    image?: string
     fontType?: string
     style?: any
     data: [string, string][]
@@ -60,7 +62,7 @@ declare namespace ReactiveDialogs {
   export interface Element<
     P = any,
     T extends string | FunctionComponent<P> = string | FunctionComponent<P>
-    > {
+  > {
     type: T
     props: P
     key: string | number | null
@@ -69,7 +71,7 @@ declare namespace ReactiveDialogs {
   export interface CustomElement<
     P = any,
     T extends FunctionComponent<P> = FunctionComponent<P>
-    > {
+  > {
     type: T
     props: P
     key: string | number | null
@@ -89,7 +91,7 @@ declare namespace ReactiveDialogs {
   export type BodyElement = Element<JSX.body, 'body'>
   export type ImageElement = Element<JSX.image, 'image'>
   export type ActionSetElement = Element<
-    JSX.actionset & { children: (ActionElement)[] },
+    JSX.actionset & { children: ActionElement[] },
     'actionset'
   >
   export type SpeakElement = Element<JSX.speak, 'speak'>
@@ -113,10 +115,7 @@ declare namespace ReactiveDialogs {
     'table'
   >
 
-  export type ListElement = Element<
-    JSX.list & { children: string[] },
-    'list'
-  >
+  export type ListElement = Element<JSX.list & { children: string[] }, 'list'>
 
   // Reactive HAST -- with type: element and tagname and isolated children
   // Identical to HAST (see unifiedjs) but with addition RHastCode type
@@ -146,7 +145,7 @@ declare namespace ReactiveDialogs {
 
   // Core Virtual dom of Reactive Cards
 
-  interface NodeArray extends Array<Node> { }
+  type NodeArray = Array<Node>
   type Child = Element | string | number
   type ElementFragment = {} | NodeArray
 
@@ -212,7 +211,6 @@ declare global {
       table: table
       /** Set of columnar data in a table  */
       list: list
-
     }
 
     /** Root element in a Reactive Dialogs Skill Flow  */

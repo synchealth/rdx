@@ -16,11 +16,11 @@ export default function compact() {
 }
 function squeeze(node: HAST.Parent, index, parent: HAST.Parent) {
   return !(
-    node.type == 'text' &&
-    node.value == '\n' &&
-    (parent.type == 'root' ||
-      parent.tagName == 'dialog' ||
-      parent.tagName == 'actions')
+    node.type === 'text' &&
+    node.value === '\n' &&
+    (parent.type === 'root' ||
+      parent.tagName === 'dialog' ||
+      parent.tagName === 'actions')
   )
 }
 
@@ -34,6 +34,8 @@ function visitorFirstPass(
     case 'h4':
       demoteDialogOrHeaderSection(child, index, parent)
       break
+    default:
+    /* noop */
   }
 }
 
@@ -44,15 +46,17 @@ function visitorSecondPass(
 ) {
   switch (child.tagName) {
     case 'text':
-      if (parent && parent.tagName == 'dialog') {
+      if (parent && parent.tagName === 'dialog') {
         visitTextInDialog(child, index, parent)
       }
       break
     case 'image':
-      if (parent && parent.tagName == 'dialog') {
+      if (parent && parent.tagName === 'dialog') {
         visitImageInDialog(child, index, parent)
       }
       break
+    default:
+    /** noop */
   }
 }
 
@@ -62,21 +66,20 @@ function demoteDialogOrHeaderSection(
   index,
   parent: HAST.Parent
 ) {
-  let siblings = parent ? parent.children : []
+  const siblings = parent ? parent.children : []
 
   let foundNextSection = false
 
   const localsiblings = findAllAfter(parent, index, node => {
     if (
-      node.tagName == 'dialog' ||
-      node.type == 'section' ||
-      node.tagName == child.tagName
+      node.tagName === 'dialog' ||
+      node.type === 'section' ||
+      node.tagName === child.tagName
     ) {
       foundNextSection = true
       return false
-    } else {
-      return !foundNextSection
     }
+    return !foundNextSection
   })
 
   siblings.splice(index + 1, localsiblings.length)
@@ -90,11 +93,11 @@ function visitTextInDialog(
   index,
   parent: HAST.Parent
 ) {
-  let siblings = parent.children
+  const siblings = parent.children
 
   if (
     index < siblings.length - 1 &&
-    siblings[index + 1].tagName == 'actionset'
+    siblings[index + 1].tagName === 'actionset'
   ) {
     const actions = (siblings[index + 1] as HAST.Element).children || []
 

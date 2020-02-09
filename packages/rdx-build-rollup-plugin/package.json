@@ -6,7 +6,7 @@
     "lint": "berun-dev lint"
   },
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
@@ -40,7 +40,7 @@
     "rollup-pluginutils": "^2.8.2"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^2.0.25"
+    "@berun/dev-scripts": "^3.0.6"
   },
   "peerDependencies": {}
 }

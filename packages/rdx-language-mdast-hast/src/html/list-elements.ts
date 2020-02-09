@@ -1,24 +1,24 @@
-import { H, wrap, all } from '../index'
 import u from 'unist-builder'
 import * as HAST from 'hast-format'
 import * as MDAST from 'mdast'
 import { Parent, Node } from 'unist'
+import { H, wrap, all } from '../index'
 
 export function listItem(
   h: H,
   node: MDAST.ListItem & Node,
   parent: MDAST.List & Parent
 ) {
-  var children = node.children
-  var head = children[0]
-  var raw = all(h, node)
-  var loose = parent ? _listLoose(parent) : _listItemLoose(node)
-  var props: HAST.Properties = {}
-  var result
-  var container
-  var index
-  var length
-  var child
+  const { children } = node
+  const head = children[0]
+  const raw = all(h, node)
+  const loose = parent ? _listLoose(parent) : _listItemLoose(node)
+  const props: HAST.Properties = {}
+  let result
+  let container
+  let index
+  let length
+  let child
 
   // Tight lists should not render `paragraph` nodes as `p` elements.
   if (loose) {
@@ -69,24 +69,23 @@ export function listItem(
 }
 
 export function list(h: H, node: MDAST.List & Parent): HAST.Element {
-  var props: any = {}
-  var name = node.ordered ? 'ol' : 'ul'
-  var items
-  var index = -1
-  var length
+  const props: any = {}
+  const name = node.ordered ? 'ol' : 'ul'
+  let index = -1
 
   if (typeof node.start === 'number' && node.start !== 1) {
     props.start = node.start
   }
 
-  items = all(h, node)
-  length = items.length
+  const items = all(h, node)
+  const { length } = items
 
   // Like GitHub, add a class for custom styling.
   while (++index < length) {
     if (
-      items[index].properties.className &&
-      items[index].properties.className.indexOf('task-list-item') !== -1
+      (items[index].properties as any).className &&
+      (items[index].properties as any).className.indexOf('task-list-item') !==
+        -1
     ) {
       props.className = ['contains-task-list']
       break
@@ -97,10 +96,10 @@ export function list(h: H, node: MDAST.List & Parent): HAST.Element {
 }
 
 function _listLoose(node: MDAST.List & Parent) {
-  var loose = node.spread
-  var children = node.children
-  var length = children.length
-  var index = -1
+  let loose = node.spread
+  const { children } = node
+  const { length } = children
+  let index = -1
 
   while (!loose && ++index < length) {
     loose = _listItemLoose(children[index])
@@ -110,7 +109,7 @@ function _listLoose(node: MDAST.List & Parent) {
 }
 
 function _listItemLoose(node: MDAST.ListItem & Node) {
-  var spread = node.spread
+  const { spread } = node
 
   return spread === undefined || spread === null
     ? node.children.length > 1

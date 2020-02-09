@@ -31,10 +31,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "reactive-cards": "0.5.31"
+    "reactive-cards": "0.5.32"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^2.0.25"
+    "@berun/dev-scripts": "^3.0.6"
   },
   "peerDependencies": {}
 }

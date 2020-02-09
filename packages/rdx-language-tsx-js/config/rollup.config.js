@@ -2,13 +2,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import { DEFAULT_EXTENSIONS } from '@babel/core'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
-import { terser } from 'rollup-plugin-terser'
 import json from 'rollup-plugin-json'
-
-const dist = 'dist'
-
-const external = id =>
-  !id.startsWith('.') && !id.startsWith('/') && !id.startsWith('\0')
 
 export default {
   preserveModules: false,
@@ -27,7 +21,7 @@ export default {
       babelrc: false,
       presets: [
         [
-          '@babel/preset-env',
+          require.resolve('@babel/preset-env'),
           {
             targets: {
               node: '8'
@@ -35,12 +29,12 @@ export default {
           }
         ]
       ],
-      plugins: ['@babel/plugin-transform-typescript'],
+      plugins: [require.resolve('@babel/plugin-transform-typescript')],
       highlightCode: true,
       compact: true,
       extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx']
     }),
-    commonjs(),
-   // terser()
+    commonjs()
+    // terser()
   ]
 }

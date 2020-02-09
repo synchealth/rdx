@@ -1,15 +1,15 @@
 import trim from 'trim'
-import { one } from './one'
 import { Node, Parent } from 'unist'
+import { one } from './one'
 import { H } from './Handler'
 
 export function all(h: H, parent: Parent): Node[] {
-  var nodes: Node[] = parent.children || []
-  var length = nodes.length
-  var values: Node[] = []
-  var index = -1
-  var result
-  var head
+  const nodes: Node[] = parent.children || []
+  const { length } = nodes
+  let values: Node[] = []
+  let index = -1
+  let result
+  let head
 
   while (++index < length) {
     result = one(h, nodes[index], parent)
@@ -35,14 +35,14 @@ export function all(h: H, parent: Parent): Node[] {
 }
 
 export function allText(h: H, parent: Parent): string[] {
-  var nodes: Node[] = parent.children || []
-  var length = nodes.length
+  const nodes: Node[] = parent.children || []
+  const { length } = nodes
 
-  var values: string[] = []
-  var index = -1
-  var result
+  let values: string[] = []
+  let index = -1
+  let result
 
-  if (parent.value && typeof parent.value == 'string') {
+  if (parent.value && typeof parent.value === 'string') {
     values.push(parent.value)
   }
 

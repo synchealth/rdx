@@ -5,7 +5,8 @@
   "scripts": {
     "lint": "berun-dev lint"
   },
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
   "keywords": [
     "berun",
     "berun-preset",
@@ -40,16 +41,16 @@
     "babel-core": "^7.0.0-bridge.0"
   },
   "dependencies": {
-    "@berun/fluent": "^2.2.2",
-    "@berun/fuse-box-plugin-babel": "^3.5.21",
-    "@berun/runner-babel": "^2.2.3",
+    "@berun/fluent": "^3.0.6",
+    "@berun/fuse-box-plugin-babel": "^3.0.6",
+    "@berun/runner-babel": "^3.0.6",
     "@rdx-js/build-fuse-box-plugin": "0.5.31",
     "remark-emoji": "^2.0.2",
     "remark-images": "^1.0.0"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^2.0.25",
-    "@berun/preset-react": "^2.2.12"
+    "@berun/dev-scripts": "^3.0.6",
+    "@berun/preset-react": "^3.0.6"
   },
   "peerDependencies": {}
 }

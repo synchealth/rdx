@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
+/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/interface-name-prefix */
 export = ReactiveCards
 export as namespace ReactiveCards
 
@@ -24,8 +27,10 @@ declare namespace ReactiveCards {
   function renderToObject(element: any, resourceRoot?: string): IAdaptiveCard
   function render(element: any, resourceRoot?: string): IAdaptiveCard
   function createFromObject(element: any): Element
-  function setLocalResourceProtocolMapper(mapper: (partial_url: string) => string): void
- 
+  function setLocalResourceProtocolMapper(
+    mapper: (partialUrl: string) => string
+  ): void
+
   function toArray(
     x: any
   ): {
@@ -98,7 +103,7 @@ declare namespace ReactiveCards {
 
   // Core Virtual dom of Reactive Cards
 
-  interface NodeArray extends Array<Node> {}
+  type NodeArray = Array<Node>
   type Child = Element | string | number
   type ElementFragment = {} | NodeArray
 
@@ -330,7 +335,8 @@ declare namespace ReactiveCards {
       | IImageSet
       | IFactSet
       | IColumnSet
-      | IContainer)[]
+      | IContainer
+    )[]
     actions?: (ISubmitAction | IOpenUrlAction | IShowCardAction)[]
     style?: ContainerStyle
     minHeight?: string | number
@@ -433,7 +439,7 @@ declare global {
       type: 'submit'
     }
     export interface actionOpenUrl extends actionGeneric {
-      /** Url that represents the locator of the resource to display or navigate to*/
+      /** Url that represents the locator of the resource to display or navigate to */
       url?: string
       type: 'openurl'
     }
@@ -526,7 +532,7 @@ declare global {
       [k: string]: any
     }
     /** The FactSet element displays a series of facts (i.e. name/value pairs) in a tabular form. */
-    export interface factset extends cardelement {}
+    export type factset = cardelement
     /** Defines a container that is part of a ColumnSet */
     export interface column extends cardelement {
       style?: 'default' | 'emphasis'

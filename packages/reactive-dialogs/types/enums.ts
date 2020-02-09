@@ -1,3 +1,5 @@
+export {}
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { definitions } = require('./adaptivecards.json')
 
 const refs: string[] = []
@@ -6,7 +8,7 @@ const result: string[] = []
 Object.keys(definitions).forEach(tagname => {
   const definition = definitions[tagname]
 
-  if (definition.type == 'string' && 'enum' in definition) {
+  if (definition.type === 'string' && 'enum' in definition) {
     refs.push(`#/definitions/${tagname}`)
   }
 })

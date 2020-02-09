@@ -1,8 +1,8 @@
-import { all, revert, H } from '../index'
 import mdurlEncode from 'mdurl/encode'
 import u from 'unist-builder'
 import * as MDAST from 'mdast'
 import { Node } from 'unist'
+import { all, revert, H } from '../index'
 
 export const reference = {
   footnoteReference,
@@ -12,24 +12,24 @@ export const reference = {
 }
 
 function footnoteReference(h: H, node: MDAST.FootnoteReference & Node) {
-  var footnoteOrder = h.footnoteOrder
-  var identifier = node.identifier
+  const { footnoteOrder } = h
+  const { identifier } = node
 
   if (footnoteOrder.indexOf(identifier) === -1) {
     footnoteOrder.push(identifier)
   }
 
-  return h(node.position as any, 'sup', { id: 'fnref-' + identifier }, [
-    h(node, 'a', { href: '#fn-' + identifier, className: ['footnote-ref'] }, [
+  return h(node.position as any, 'sup', { id: `fnref-${identifier}` }, [
+    h(node, 'a', { href: `#fn-${identifier}`, className: ['footnote-ref'] }, [
       u('text', node.label || identifier)
     ])
   ])
 }
 
 function footnote(h: H, node: MDAST.Footnote & Node) {
-  var footnoteById = h.footnoteById
-  var footnoteOrder = h.footnoteOrder
-  var identifier: number | string = 1
+  const { footnoteById } = h
+  const { footnoteOrder } = h
+  let identifier: number | string = 1
 
   while (identifier in footnoteById) {
     identifier++
@@ -43,27 +43,26 @@ function footnote(h: H, node: MDAST.Footnote & Node) {
 
   footnoteById[identifier] = {
     type: 'footnoteDefinition',
-    identifier: identifier,
+    identifier,
     children: [{ type: 'paragraph', children: node.children }],
     position: node.position
   }
 
   return footnoteReference(h, {
     type: 'footnoteReference',
-    identifier: identifier,
+    identifier,
     position: node.position
   })
 }
 
 function imageReference(h: H, node: MDAST.ImageReference & Node) {
-  var def = h.definition(node.identifier)
-  var props
+  const def = h.definition(node.identifier)
 
   if (!def) {
     return revert(h, node)
   }
 
-  props = { src: mdurlEncode(def.url || ''), alt: node.alt }
+  const props: any = { src: mdurlEncode(def.url || ''), alt: node.alt }
 
   if (def.title !== null && def.title !== undefined) {
     props.title = def.title
@@ -73,14 +72,12 @@ function imageReference(h: H, node: MDAST.ImageReference & Node) {
 }
 
 function linkReference(h, node) {
-  var def = h.definition(node.identifier)
-  var props
-
+  const def = h.definition(node.identifier)
   if (!def) {
     return revert(h, node)
   }
 
-  props = { href: mdurlEncode(def.url || '') }
+  const props: any = { href: mdurlEncode(def.url || '') }
 
   if (def.title !== null && def.title !== undefined) {
     props.title = def.title

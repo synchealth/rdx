@@ -1,12 +1,17 @@
-const { RDXPlugin } = require('@rdx-js/build-fuse-box-plugin')
-const { BabelPlugin } = require('@berun/fuse-box-plugin-babel')
-const babel = require('@berun/runner-babel')
+import { RDXPlugin } from '@rdx-js/build-fuse-box-plugin'
+import { BabelPlugin } from '@berun/fuse-box-plugin-babel'
+import babel from '@berun/runner-babel'
+import { BerunRdx } from './rdx-berun-fluent'
 
-module.exports = (berun, options = {}) => {
-  if (!('fusebox' in berun)) throw new Error('Missing fuse-box configuration')
+export default (berun: BerunRdx, options = {}) => {
+  if (!('fusebox' in berun)) {
+    throw new Error('Missing fuse-box configuration')
+  }
 
   // Add babel even if not used by Typescript
-  if (!('babel' in berun)) berun.use(babel)
+  if (!('babel' in berun)) {
+    berun.use(babel)
+  }
 
   berun.fusebox
     .pluginset('RDXset')
@@ -22,7 +27,7 @@ module.exports = (berun, options = {}) => {
   berun.fusebox.toConfig = (omit = []) => {
     const _ = _toConfig.call(berun.fusebox, omit)
 
-    if (berun.fusebox.plugins.has('RDXset'))
+    if (berun.fusebox.plugins.has('RDXset')) {
       berun.fusebox
         .pluginset('RDXset')
         .plugin('RDX')
@@ -34,6 +39,7 @@ module.exports = (berun, options = {}) => {
           limit2project: true,
           config: Object.assign(berun.babel.toConfig(), { ast: true })
         }))
+    }
 
     return _toConfig.call(berun.fusebox, omit)
   }

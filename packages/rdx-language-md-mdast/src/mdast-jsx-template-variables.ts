@@ -1,9 +1,9 @@
 import { parseUntil } from 'character-parser'
 
 export default function remarkTemplateBlocks(this: { Parser: any }) {
-  var Parser = this.Parser
-  var tokenizers = Parser.prototype.inlineTokenizers
-  var methods = Parser.prototype.inlineMethods
+  const { Parser } = this
+  const tokenizers = Parser.prototype.inlineTokenizers
+  const methods = Parser.prototype.inlineMethods
 
   /* Add an inline tokenizer  */
   tokenizers.variable = tokenizeVariable
@@ -17,12 +17,12 @@ tokenizeVariable.notInList = false
 tokenizeVariable.notInLink = false
 tokenizeVariable.locator = locateVariable
 
-var dollarCurly = '${'
-var closeCurly = '}'
+const dollarCurly = '${'
+const closeCurly = '}'
 
 function tokenizeVariable(eat, value, silent) {
   if (value.substr(0, 2) !== dollarCurly) {
-    return
+    return null
   }
 
   let range
@@ -35,6 +35,7 @@ function tokenizeVariable(eat, value, silent) {
     })
   } catch (ex) {
     console.log(
+      // eslint-disable-next-line no-template-curly-in-string
       "RDX syntax error - found template variable opening brace '${' start without closing brace '}' "
     )
     return eat(value)({ type: 'text', value })

@@ -1,16 +1,18 @@
 import { Node, Parent } from 'unist'
 import * as HAST from 'hast-format'
-import { H } from './Handler'
 
 import xtend from 'xtend'
-import u from 'unist-builder'
-const visit = require('unist-util-visit') // CJS ONLY
+import u from 'unist-builder' // CJS ONLY
 import position from 'unist-util-position'
 import generated from 'unist-util-generated'
 import definitions from 'mdast-util-definitions'
+import { H } from './Handler'
 
-import { default as defaultHandlers } from './default-handlers'
+import defaultHandlers from './default-handlers'
 import { one } from './one'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const visit = require('unist-util-visit')
 
 export { all, allText } from './all'
 export { one } from './one'
@@ -18,17 +20,17 @@ export { revert } from './revert'
 export { wrap } from './wrap'
 export { H, Handler } from './Handler'
 
-export interface toHastProps {
+export interface ToHastProps {
   allowDangerousHTML?: boolean
   handlers?: object
   footer?: (h: H) => HAST.Element | null
 }
 
 /** Transform `tree`, which is an mdast node, to a hast node.  */
-export default function toHAST(tree: Parent, options: toHastProps) {
-  var h = factory(tree, options)
+export default function toHAST(tree: Parent, options: ToHastProps) {
+  const h = factory(tree, options)
 
-  var node = one(h, tree) as Parent
+  const node = one(h, tree) as Parent
 
   if (options.footer) {
     const foot = options.footer(h)
@@ -41,13 +43,15 @@ export default function toHAST(tree: Parent, options: toHastProps) {
   return node
 }
 
-export const rdhastRaw = () => ast => {}
+export const rdhastRaw = () => ast => {
+  /** noop */
+}
 
 /**  Factory to transform. */
-function factory(tree: Parent, options: toHastProps): H {
-  var settings = options || {}
-  var dangerous = settings.allowDangerousHTML
-  var footnoteById = {}
+function factory(tree: Parent, options: ToHastProps): H {
+  const settings = options || {}
+  const dangerous = settings.allowDangerousHTML
+  const footnoteById = {}
 
   h.dangerous = dangerous
   h.definition = definitions(tree, settings)
@@ -62,8 +66,7 @@ function factory(tree: Parent, options: toHastProps): H {
 
   // Finalise the created `right`, a hast node, from `left`, an mdast node.
   function augment(left: Node, right: HAST.Element): HAST.Element {
-    var data
-    var ctx
+    let data
 
     // Handle `data.hName`, `data.hProperties, `data.hChildren`.
     if (left && 'data' in left) {
@@ -82,7 +85,7 @@ function factory(tree: Parent, options: toHastProps): H {
       }
     }
 
-    ctx = left && left.position ? left : { position: left }
+    const ctx = left && left.position ? left : { position: left }
 
     if (!generated(ctx)) {
       right.position = {
@@ -112,18 +115,18 @@ function factory(tree: Parent, options: toHastProps): H {
 
     return augment(node, {
       type: 'element',
-      tagName: tagName,
+      tagName,
       properties: props || {},
       children: (children || []) as any
     })
   }
 
   function onfootnotedefinition(definition) {
-    var id = definition.identifier.toUpperCase()
+    const id = definition.identifier.toUpperCase()
 
     // Mimick CM behavior of link definitions.
     // See: <https://github.com/syntax-tree/mdast-util-definitions/blob/8d48e57/index.js#L26>.
-    if (!footnoteById.hasOwnProperty(id)) {
+    if (!Object.prototype.hasOwnProperty.call(footnoteById, id)) {
       footnoteById[id] = definition
     }
   }

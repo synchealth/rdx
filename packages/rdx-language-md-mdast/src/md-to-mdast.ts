@@ -1,4 +1,6 @@
 import greedyHtml from './mdast-jsx-remark-token'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const visit = require('unist-util-visit') // CJS ONLY
 
 const commentOpen = '<!--'
@@ -8,7 +10,7 @@ const isDOM = /^<[a-z]/
 // const noop = () => false
 
 export default function jsxtoRdxAst(this: { Parser: any }, _options) {
-  var Parser = this.Parser
+  const { Parser } = this
   Parser.prototype.inlineTokenizers.html = greedyHtml
   Parser.prototype.blockTokenizers.html = greedyHtml
 

@@ -1,5 +1,5 @@
 export default function remarkImportExport(this: any) {
-  const Parser = this.Parser
+  const { Parser } = this
   const tokenizers = Parser.prototype.blockTokenizers
   const methods = Parser.prototype.blockMethods
 
@@ -19,6 +19,7 @@ const tokenizeEsSyntax = (eat, value) => {
       value: subvalue
     })
   }
+  return undefined
 }
 
 tokenizeEsSyntax.locator = (value, _fromIndex) =>

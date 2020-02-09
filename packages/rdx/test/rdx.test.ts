@@ -1,4 +1,5 @@
-import { rdxSync } from '../dist/index'
+import { performance } from 'perf_hooks'
+import { rdxSync } from '../src/index'
 
 const src = `---
 pack: Halt 
@@ -113,11 +114,10 @@ Remember, you are <card>sasdadasd</card> not your feelings! Let feelings arise a
 ### Footnotes
 
 Include any references or installation notes here, as well as any extra imports or exports for the embedded React code, if any`
-const { performance } = require('perf_hooks')
 
-var t0 = performance.now()
+const t0 = performance.now()
 const item = rdxSync(src)
-var t1 = performance.now()
+const t1 = performance.now()
 
 console.log(item)
 

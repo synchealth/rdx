@@ -7,7 +7,7 @@
     "lint": "berun-dev lint"
   },
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "types": "src/index.ts",
   "authors": [
     "Tinia Labs",
     "Sync Health Labs <labs@noreply.sync.health>",
@@ -33,7 +33,7 @@
     "unist-util-visit": "^1.4.1"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^2.0.25"
+    "@berun/dev-scripts": "^3.0.6"
   },
   "peerDependencies": {}
 }

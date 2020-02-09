@@ -29,8 +29,9 @@ function createFromObject(element, _parent) {
     element == null
   ) {
     return element
-  } else if (Array.isArray(element)) {
-    let result: any[] = []
+  }
+  if (Array.isArray(element)) {
+    const result: any[] = []
 
     for (let i = 0, len = element.length; i < len; i++) {
       result.push(createFromObject(element[i], element))
@@ -39,10 +40,10 @@ function createFromObject(element, _parent) {
     return result
   }
 
-  const type = element.type
+  const { type } = element
 
-  if (type && typeof type == 'string') {
-    let result: any = {
+  if (type && typeof type === 'string') {
+    const result: any = {
       type: CLASS_ALIASES_FLIPPED[type],
       props: { children: [] }
     }
@@ -50,80 +51,77 @@ function createFromObject(element, _parent) {
     Object.keys(element).forEach(key => {
       if (CASE_INSENSITIVE[key] === true) {
         const str = element[key]
-        if (str && typeof str == 'string') {
+        if (str && typeof str === 'string') {
           element[key] = str.charAt(0).toLowerCase() + str.slice(1)
         }
       }
     })
 
     if (type in SPLIT_ALIASES_FLIPPED) {
-      const { type: new_type, subtype } = SPLIT_ALIASES_FLIPPED[type]
-      const new_element = { ...element, type: new_type }
-      const result = createFromObject(new_element, _parent)
-      result.type = new_type
-      result.props.type = subtype
-      return result
+      const { type: newType, subtype } = SPLIT_ALIASES_FLIPPED[type]
+      const newElement = { ...element, type: newType }
+      const newResult = createFromObject(newElement, _parent)
+      newResult.type = newType
+      newResult.props.type = subtype
+      return newResult
     }
 
     Object.keys(element).forEach(key => {
-      if (key == 'type') {
-      } else {
-        if (key in CHILDREN_PROPS_FLIPPED) {
-          const new_children = createFromObject(element[key], element)
-          result.props.children = result.props.children.concat( new_children ) 
-        } else if (key in CHILDREN_TEXT_PROPS_FLIPPED) {
-          const new_children = createFromObject(element[key], element)
-          result.props.children = result.props.children.concat( new_children ) 
-        } else if (key in CHILDREN_CONTAINER_PROPS_FLIPPED) {
-          const new_children = createFromObject(element[key], element)
+      if (key === 'type') {
+        /** noop */
+      } else if (key in CHILDREN_PROPS_FLIPPED) {
+        const newChildren = createFromObject(element[key], element)
+        result.props.children = result.props.children.concat(newChildren)
+      } else if (key in CHILDREN_TEXT_PROPS_FLIPPED) {
+        const newChildren = createFromObject(element[key], element)
+        result.props.children = result.props.children.concat(newChildren)
+      } else if (key in CHILDREN_CONTAINER_PROPS_FLIPPED) {
+        const newChildren = createFromObject(element[key], element)
 
-          result.props.children = result.props.children.concat({
-           type: CHILDREN_CONTAINER_PROPS_FLIPPED[key],
-           props: { children: new_children }
-          })
-          
-        }  else if (
-          type in PROMOTE_ALIASES_FLIPPED &&
-          key in PROMOTE_ALIASES_FLIPPED[type]
+        result.props.children = result.props.children.concat({
+          type: CHILDREN_CONTAINER_PROPS_FLIPPED[key],
+          props: { children: newChildren }
+        })
+      } else if (
+        type in PROMOTE_ALIASES_FLIPPED &&
+        key in PROMOTE_ALIASES_FLIPPED[type]
+      ) {
+        const childNewType = PROMOTE_ALIASES_FLIPPED[type][key]
+        const children = element[key]
+
+        if (
+          typeof children === 'string' ||
+          typeof children === 'number' ||
+          typeof children === 'boolean'
         ) {
-          const child_new_type = PROMOTE_ALIASES_FLIPPED[type][key]
-          const children = element[key]
-
-          if (
-            typeof children === 'string' ||
-            typeof children === 'number' ||
-            typeof children === 'boolean'
-          ) {
-            result.props.children.push({
-              type: child_new_type,
-              props: { children }
-            })
-          } else if (Array.isArray(children)) {
-            result.props.children = result.props.children.concat({
-              type: child_new_type,
-              props: {
-                children: children.map(child => {
-                  const new_child = createFromObject(child, element)
-                  return new_child
-                })
-              }
-            })
-          } else {
-            result.props.children.push({
-              type: child_new_type,
-              props: { ...children }
-            })
-          }
+          result.props.children.push({
+            type: childNewType,
+            props: { children }
+          })
+        } else if (Array.isArray(children)) {
+          result.props.children = result.props.children.concat({
+            type: childNewType,
+            props: {
+              children: children.map(child => {
+                const newChild = createFromObject(child, element)
+                return newChild
+              })
+            }
+          })
         } else {
-          result.props[key] = createFromObject(element[key], element)
+          result.props.children.push({
+            type: childNewType,
+            props: { ...children }
+          })
         }
+      } else {
+        result.props[key] = createFromObject(element[key], element)
       }
     })
 
     return result
-  } else {
-    throw new Error(`Invalid card element type`)
   }
+  throw new Error(`Invalid card element type`)
 }
 
 export default createFromObject

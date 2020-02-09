@@ -1,4 +1,4 @@
-import RDX from '../dist/transpile'
+import { rdx } from '@rdx-js/rdx'
 
 const halt = `---
 type: ReactiveMarkdownDialog
@@ -112,8 +112,8 @@ Remember, you are not your feelings! Let feelings arise and fall in the body wit
 Include any references or installation notes here, as well as any extra imports or exports for the embedded React code, if any
 `
 
-const asyncTest = async function() {
-  const result = await RDX(halt, 'test.md')
+const asyncTest = async () => {
+  const result = await rdx(halt, 'test.md')
   console.log(result)
 }
 

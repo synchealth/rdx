@@ -1,30 +1,44 @@
-const fluent_1 = require('@berun/fluent')
-const Plugin_1 = require('./Plugin')
-class Rdx extends fluent_1.FluentMap {
+import { FluentMap } from '@berun/fluent'
+import Plugin from './Plugin'
+
+export default class Rdx extends FluentMap<any> {
+  mdPlugins: FluentMap<this>
+
+  hastPlugins: FluentMap<this>
+
   constructor(parent = null, name = null) {
     super(parent, name)
-    this.mdPlugins = new fluent_1.FluentMap(this)
-    this.hastPlugins = new fluent_1.FluentMap(this)
+    this.mdPlugins = new FluentMap(this)
+    this.hastPlugins = new FluentMap(this)
     this.extendfluent()
   }
-  plugin(name, use, opts) {
+
+  plugin(name, use?, opts?) {
     if (!this.mdPlugins.has(name)) {
-      this.mdPlugins.set(name, new Plugin_1.Plugin(this, name))
+      this.mdPlugins.set(name, new Plugin(this, name))
     }
     const plugin = this.mdPlugins.get(name)
-    if (use) plugin.use(use, opts)
-    else plugin.use(name)
+    if (use) {
+      plugin.use(use, opts)
+    } else {
+      plugin.use(name)
+    }
     return plugin
   }
-  hast(name, use, opts) {
+
+  hast(name, use?, opts?) {
     if (!this.hastPlugins.has(name)) {
-      this.hastPlugins.set(name, new Plugin_1.Plugin(this, name))
+      this.hastPlugins.set(name, new Plugin(this, name))
     }
     const plugin = this.hastPlugins.get(name)
-    if (use) plugin.use(use, opts)
-    else plugin.use(name)
+    if (use) {
+      plugin.use(use, opts)
+    } else {
+      plugin.use(name)
+    }
     return plugin
   }
+
   toConfig(omit = []) {
     return Object.assign(
       super.toConfig(omit.concat(['mdPlugins', 'hastPlugins'])) || {},
@@ -34,8 +48,11 @@ class Rdx extends fluent_1.FluentMap {
       })
     )
   }
+
   merge(obj, omit = []) {
-    if (!obj) return this
+    if (!obj) {
+      return this
+    }
     if (!omit.includes('mdPlugins') && 'mdPlugins' in obj) {
       Object.keys(obj.mdPlugins).forEach(name =>
         this.plugin(name).merge(obj.mdPlugins[name])
@@ -49,4 +66,3 @@ class Rdx extends fluent_1.FluentMap {
     return super.merge(obj, [...omit, 'mdPlugins', 'hastPlugins'])
   }
 }
-exports.Rdx = Rdx

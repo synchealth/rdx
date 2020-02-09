@@ -3,48 +3,47 @@
 Rollup Plugin to process rdx and markdown files
 
 ## RDX Transpiler Plugin
+
 Simple wrapper around `@rdx-js/rdx` converts `.md` and `.rdx` files to `.jsx`/`.tsx`
 
 Use with sucrase or basbel to transpile the generated `.jsx`/`.tsx` to `.js`
 
-
 ### Usage in rollup configuration
 
-``` js
-
+```js
 import { rdxTranspiler } from '@rdx-js/build-rollup-plugin'
 
 // ...
 
 plugins: [
-    // :
-    resolve(),
-    rdxTranspiler(),
-    renameExtensions({
-      mappings: {
-        '.md': '.js',
-        '.rdx': '.js'
-      }
-    }),
-    sucrase({
-      jsxPragma: 'h',
-      production: true,
-      exclude: ['node_modules/**'],
-      transforms: ['jsx', 'typescript']
-    })
-  ]
+  // :
+  resolve(),
+  rdxTranspiler(),
+  renameExtensions({
+    mappings: {
+      '.md': '.js',
+      '.rdx': '.js'
+    }
+  }),
+  sucrase({
+    jsxPragma: 'h',
+    production: true,
+    exclude: ['node_modules/**'],
+    transforms: ['jsx', 'typescript']
+  })
+]
 ```
 
 ## RDX Packer Plugin
 
-Simple aggregator that converts a dummy index.js in the source folder to a full index of all the transpiled markdown files, including meta data.   Creates a single IOPA function that when called registers itself with the Reactive Dialogs manager.
+Simple aggregator that converts a dummy index.js in the source folder to a full index of all the transpiled markdown files, including meta data. Creates a single IOPA function that when called registers itself with the Reactive Dialogs manager.
 
 ### Required Source Repository structure
 
 ```
 /
 /assets
-   image1.jpg 
+   image1.jpg
    video1.mp4
 markdownfile1.md
 markdownfile2.rdx
@@ -52,7 +51,7 @@ index.js
 global.d.ts
 ```
 
-``` js
+```js
 // global.d.ts
 declare module "*.md" {
   const value: string;
@@ -67,14 +66,14 @@ declare module "*.rdx" {
 }
 ```
 
-``` js
+```js
 // index.ts
 // placeholder, replaced with index during rollup phase
 ```
 
 ### Rollup configuration
 
-``` js
+```js
 import { rdxPacker } from '@rdx-js/build-rollup-plugin'
 
 // import other plugins

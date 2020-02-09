@@ -8,12 +8,10 @@ const attributeName = '[a-zA-Z_:][a-zA-Z0-9:._-]*'
 const unquoted = '[^"\'=<>`\\u0000-\\u0020]+'
 const singleQuoted = "'[^']*'"
 const doubleQuoted = '"[^"]*"'
-const attributeValue =
-  '(?:' + unquoted + '|' + singleQuoted + '|' + doubleQuoted + ')'
-const attribute =
-  '(?:\\s+' + attributeName + '(?:\\s*=\\s*' + attributeValue + ')?)'
+const attributeValue = `(?:${unquoted}|${singleQuoted}|${doubleQuoted})`
+const attribute = `(?:\\s+${attributeName}(?:\\s*=\\s*${attributeValue})?)`
 
-const openTag = '<[A-Za-z][A-Za-z0-9\\-.]*' + attribute + '*\\s*\\/?>'
+const openTag = `<[A-Za-z][A-Za-z0-9\\-.]*${attribute}*\\s*\\/?>`
 const closeTag = '<\\/[A-Za-z][A-Za-z0-9\\-.]*\\s*>'
 const comment = '<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->'
 const processing = '<[?].*?[?]>'
@@ -21,31 +19,18 @@ const declaration = '<![A-Za-z]+\\s+[^>]*>'
 const cdata = '<!\\[CDATA\\[[\\s\\S]*?\\]\\]>'
 const fragment = '</?>'
 
-const tag = new RegExp(
-  '^(?:' +
-    openTag +
-    '|' +
-    closeTag +
-    '|' +
-    fragment +
-    '|' +
-    comment +
-    '|' +
-    processing +
-    '|' +
-    declaration +
-    '|' +
-    cdata +
-    ')'
+const TAG_REGEXP = new RegExp(
+  `^(?:${openTag}|${closeTag}|${fragment}|${comment}|${processing}|${declaration}|${cdata})`
 )
 
 // ***TODO ADD VOID CHILDLESS REACTIVE ELEMENTS HERE
-var tagVoidElement = /^<(?:input|img|br|wbr|hr|area|base|col|embed|keygen|link|meta|param|source|track)/
+const tagVoidElement = /^<(?:input|img|br|wbr|hr|area|base|col|embed|keygen|link|meta|param|source|track)/
 
 /* Check if the given character code, or the character
  * code at the first character, is alphabetical. */
 function alphabetical(character) {
-  var code = typeof character === 'string' ? character.charCodeAt(0) : character
+  const code =
+    typeof character === 'string' ? character.charCodeAt(0) : character
 
   return (
     (code >= 97 && code <= 122) /* a-z */ ||
@@ -59,15 +44,14 @@ export default function greedyHtml(
   value: string,
   silent: boolean
 ) {
-  var length = value.length
-  var character
-  var subvalue
+  const { length } = value
+  let subvalue
 
   if (value.charAt(0) !== lessThan || length < 3) {
-    return
+    return false
   }
 
-  character = value.charAt(1)
+  const character = value.charAt(1)
 
   if (
     !alphabetical(character) &&
@@ -76,13 +60,13 @@ export default function greedyHtml(
     character !== questionMark &&
     character !== exclamationMark
   ) {
-    return
+    return false
   }
 
-  subvalue = value.match(tag)
+  subvalue = value.match(TAG_REGEXP)
 
   if (!subvalue) {
-    return
+    return false
   }
 
   /* istanbul ignore if - not used yet. */
@@ -98,21 +82,21 @@ export default function greedyHtml(
 const tagRegExp = /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])*>/g
 
 function _getHtml(html: string) {
-  let result: string[] = []
+  const result: string[] = []
   let level = -1
   let breakout = false
 
-  html.replace(tagRegExp, function(tag: string, index) {
+  html.replace(tagRegExp, (tag: string, index) => {
     if (breakout) {
-      return
+      return null
     }
 
     result.push(tag)
 
-    var isOpen = tag.charAt(1) !== '/'
-    var isVoid = false
-    var nextStart = index + tag.length
-    var nextChar = html.charAt(nextStart)
+    const isOpen = tag.charAt(1) !== '/'
+    let isVoid = false
+    const nextStart = index + tag.length
+    const nextChar = html.charAt(nextStart)
 
     if (isOpen) {
       level++
@@ -122,9 +106,9 @@ function _getHtml(html: string) {
       }
 
       if (!isVoid && nextChar && nextChar !== '<') {
-        let nextStartAfterText = html.indexOf('<', nextStart)
+        const nextStartAfterText = html.indexOf('<', nextStart)
         if (!nextStartAfterText) {
-          throw new Error('Missing closing tag for ' + tag)
+          throw new Error(`Missing closing tag for ${tag}`)
         }
 
         result.push(html.slice(nextStart, nextStartAfterText))
@@ -136,11 +120,11 @@ function _getHtml(html: string) {
       if (nextChar !== '<' && nextChar) {
         if (level === -1) {
           breakout = true
-          return
+          return null
         }
 
-        let nextStartAfterText = html.indexOf('<', nextStart)
-        var content = html.slice(
+        const nextStartAfterText = html.indexOf('<', nextStart)
+        const content = html.slice(
           nextStart,
           nextStartAfterText === -1 ? undefined : nextStartAfterText
         )
@@ -148,7 +132,9 @@ function _getHtml(html: string) {
         result.push(content)
       }
     }
-  } as any)
+
+    return null
+  })
 
   return result.join('')
 }

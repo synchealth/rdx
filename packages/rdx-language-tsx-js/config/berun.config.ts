@@ -1,15 +1,16 @@
-const webpack = require('@berun/runner-webpack')
-const jestRunner = require('@berun/runner-jest')
-const polyfills = require('@berun/runner-web-polyfills')
+import webpack from '@berun/runner-webpack'
+import jestRunner from '@berun/runner-jest'
+import polyfills from '@berun/runner-web-polyfills'
+import { Babel } from '@berun/fluent-babel'
+import { BerunRdx } from '../../rdx-build-berun/src/rdx-berun-fluent'
 
-const Babel = require('@berun/fluent-babel').Babel
-
-module.exports = {
+export default {
   use: [
-    '@berun/runner-prettier',
+    require.resolve('@berun/runner-prettier'),
 
-    (berun, options = {}) => {
-      const ISPRODUCTION = process.env.NODE_ENV == 'production'
+    (berun: BerunRdx, options: { ISPRODUCTION?: boolean } = {}) => {
+      const ISPRODUCTION =
+        options.ISPRODUCTION || process.env.NODE_ENV === 'production'
       console.log(
         berun.options.paths.isTypeScript
           ? 'TypeScript Project'
@@ -22,7 +23,7 @@ module.exports = {
         babelrc: false,
         presets: [
           [
-            '@babel/preset-env',
+            require.resolve('@babel/preset-env'),
             {
               targets: {
                 node: '8'
@@ -31,15 +32,15 @@ module.exports = {
           ]
         ],
         plugins: [
-          '@babel/plugin-transform-typescript',
-          '@babel/plugin-transform-modules-commonjs'
+          require.resolve('@babel/plugin-transform-typescript'),
+          require.resolve('@babel/plugin-transform-modules-commonjs')
         ],
         highlightCode: true,
-        compact: options.ISPRODUCTION ? true : false
+        compact: !!ISPRODUCTION
       })
 
       berun.babel
-        .plugin('@babel/plugin-proposal-decorators')
+        .plugin(require.resolve('@babel/plugin-proposal-decorators'))
         .options({ legacy: true })
         .end()
 
@@ -62,9 +63,7 @@ module.exports = {
       berun.sparky.task('build', webpack.taskProd)
     },
 
-    berun => {
-      const ISPRODUCTION = process.env.NODE_ENV == 'production'
-
+    (berun: BerunRdx) => {
       berun.webpack.optimization.splitChunks({}).runtimeChunk(false)
 
       berun.webpack.output.filename('[name].js')

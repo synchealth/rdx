@@ -1,4 +1,7 @@
-const { Fragment } = require('./fragment') // important must use commonjs required Symbol in case running under webpack
+// important must use commonjs required Symbol in case running under webpack
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { Fragment } = require('./fragment')
+
 const EMPTY_OBJECT = Object.freeze({})
 
 export default function render(element, _parent?: any): any {
@@ -9,8 +12,9 @@ export default function render(element, _parent?: any): any {
     element == null
   ) {
     return element
-  } else if (Array.isArray(element)) {
-    let result: any[] = []
+  }
+  if (Array.isArray(element)) {
+    const result: any[] = []
 
     for (let i = 0, len = element.length; i < len; i++) {
       const item = render(element[i], element)
@@ -22,7 +26,7 @@ export default function render(element, _parent?: any): any {
     return result as any
   }
 
-  const type = element.type
+  const { type } = element
 
   if (!type) {
     throw new Error(`Invalid dialog element type`)
@@ -30,18 +34,20 @@ export default function render(element, _parent?: any): any {
 
   const props = element.props || EMPTY_OBJECT
 
-  for (const prop in props) {
+  Object.keys(props).forEach(prop => {
     if (prop.startsWith('__')) {
       delete props[prop]
     }
-  }
+  })
 
   if (typeof type === 'function') {
     return render(type(props), element)
-  } else if (type === Fragment) {
+  }
+  if (type === Fragment) {
     return render(props.children, element)
-  } else if (typeof type === 'string') {
-    let result: any = {}
+  }
+  if (typeof type === 'string') {
+    const result: any = {}
 
     result.type = type
 
@@ -49,7 +55,7 @@ export default function render(element, _parent?: any): any {
 
     result.props.children = render(props.children, element)
 
-    for (const prop in props) {
+    Object.keys(props).forEach(prop => {
       const value = props[prop]
 
       if (prop === 'children' || prop === 'key' || prop === 'ref') {
@@ -57,8 +63,10 @@ export default function render(element, _parent?: any): any {
       } else {
         result.props[prop] = value
       }
-    }
+    })
 
     return result
   }
+
+  return undefined
 }

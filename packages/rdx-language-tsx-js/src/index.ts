@@ -7,13 +7,16 @@ export default async function rdxAsync(src, filename) {
     skipExport: true,
     filename
   })
-  const code: any = transform(interim, {
+  const { code } = transform(interim, {
     jsxPragma: 'h',
     production: true,
     transforms: ['typescript', 'imports', 'jsx']
-  }).code
-  if (!code) return code
-  const new_code =
-    'return ' + code.substr('"use strict";/** @jsx h */\n\n'.length)
-  return new_code
+  })
+  if (!code) {
+    return code
+  }
+  const newCode = `return ${code.substr(
+    '"use strict";/** @jsx h */\n\n'.length
+  )}`
+  return newCode
 }

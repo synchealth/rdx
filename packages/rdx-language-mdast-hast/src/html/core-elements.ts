@@ -1,4 +1,3 @@
-import { H, wrap, all, revert } from '../index'
 import mdurlEncode from 'mdurl/encode'
 import detab from 'detab'
 import collapseWhiteSpace from 'collapse-white-space'
@@ -8,6 +7,7 @@ import trimLines from 'trim-lines'
 import * as HAST from 'hast-format'
 import * as MDAST from 'mdast'
 import { Node, Parent } from 'unist'
+import { H, wrap, all, revert } from '../index'
 
 export const core = {
   blockquote(h: H, node: MDAST.Blockquote & Parent) {
@@ -19,12 +19,12 @@ export const core = {
   },
 
   code(h: H, node: MDAST.Code & Node) {
-    var value = node.value ? detab(node.value + '\n') : ''
-    var lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
-    var props: HAST.Properties = {}
+    const value = node.value ? detab(`${node.value}\n`) : ''
+    const lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
+    const props: HAST.Properties = {}
 
     if (lang) {
-      props.className = ['language-' + lang]
+      props.className = [`language-${lang}`]
     }
 
     return h(node.position as any, 'pre', [
@@ -41,7 +41,7 @@ export const core = {
   },
 
   heading(h: H, node: MDAST.Heading & Node) {
-    return h(node, 'h' + node.depth, all(h, node))
+    return h(node, `h${node.depth}`, all(h, node))
   },
 
   html(h: H, node: MDAST.HTML & Node) {
@@ -49,14 +49,13 @@ export const core = {
   },
 
   imageReference(h: H, node: MDAST.ImageReference & Node) {
-    var def = h.definition(node.identifier)
-    var props
+    const def = h.definition(node.identifier)
 
     if (!def) {
       return revert(h, node)
     }
 
-    props = { src: mdurlEncode(def.url || ''), alt: node.alt }
+    const props: any = { src: mdurlEncode(def.url || ''), alt: node.alt }
 
     if (def.title !== null && def.title !== undefined) {
       props.title = def.title
@@ -66,7 +65,7 @@ export const core = {
   },
 
   image(h: H, node: MDAST.Image & Node) {
-    var props: HAST.Properties = { src: mdurlEncode(node.url), alt: node.alt }
+    const props: HAST.Properties = { src: mdurlEncode(node.url), alt: node.alt }
 
     if (node.title !== null && node.title !== undefined) {
       props.title = node.title
@@ -80,7 +79,7 @@ export const core = {
   },
 
   link(h: H, node: MDAST.Link & Node) {
-    var props: HAST.Properties = { href: mdurlEncode(node.url) }
+    const props: HAST.Properties = { href: mdurlEncode(node.url) }
 
     if (node.title !== null && node.title !== undefined) {
       props.title = node.title

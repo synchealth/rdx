@@ -1,25 +1,26 @@
+import { Node } from 'unist'
+import * as MDAST from 'mdast'
 import { thematicBreak } from './thematic-break'
 import { list } from './list-elements'
 import { wrap } from '../wrap'
-import { Node } from 'unist'
 import { H } from '../Handler'
-import * as MDAST from 'mdast'
 
 export function footer(h: H) {
-  var footnoteById = h.footnoteById
-  var footnoteOrder = h.footnoteOrder
-  var length = footnoteOrder.length
-  var index = -1
-  var listItems: (MDAST.ListItem & Node)[] = []
-  var def
-  var backReference
-  var content
-  var tail
+  const { footnoteById } = h
+  const { footnoteOrder } = h
+  const { length } = footnoteOrder
+  let index = -1
+  const listItems: (MDAST.ListItem & Node)[] = []
+  let def
+  let backReference
+  let content
+  let tail
 
   while (++index < length) {
     def = footnoteById[footnoteOrder[index].toUpperCase()]
 
     if (!def) {
+      // eslint-disable-next-line no-continue
       continue
     }
 
@@ -27,7 +28,7 @@ export function footer(h: H) {
     tail = content[content.length - 1]
     backReference = {
       type: 'link',
-      url: '#fnref-' + def.identifier,
+      url: `#fnref-${def.identifier}`,
       data: { hProperties: { className: ['footnote-backref'] } },
       children: [{ type: 'text', value: '↩' }]
     }
@@ -41,7 +42,7 @@ export function footer(h: H) {
 
     listItems.push({
       type: 'listItem',
-      data: { hProperties: { id: 'fn-' + def.identifier } },
+      data: { hProperties: { id: `fn-${def.identifier}` } },
       children: content,
       position: def.position
     })

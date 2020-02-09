@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const visit = require('unist-util-visit') // CJS ONLY
 
 const commentOpen = '<!--'

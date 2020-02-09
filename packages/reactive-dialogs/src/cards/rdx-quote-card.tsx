@@ -7,10 +7,10 @@ export const RDXQuoteCard: ReactiveCards.FC<{ title?: string }> = ({
 }) => {
   const elements = ReactiveCards.Children.toArray(children)
 
-  const image = elements.find(child => child.type == 'image')
+  const image = elements.find(child => child.type === 'image')
 
-  let texts = elements
-    .filter(child => child.type == 'text')
+  const texts = elements
+    .filter(child => child.type === 'text')
     .map(text => text.props.children.join(' '))
 
   let lastText
@@ -20,9 +20,9 @@ export const RDXQuoteCard: ReactiveCards.FC<{ title?: string }> = ({
     texts.splice(-1, 1)
   }
 
-  const actionset = elements.find(child => child.type == 'actionset')
+  const actionset = elements.find(child => child.type === 'actionset')
   const actions = elements
-    .filter(child => child.type == 'action')
+    .filter(child => child.type === 'action')
     .concat(
       actionset ? ReactiveCards.Children.toArray(actionset.props.children) : []
     )
@@ -46,7 +46,9 @@ export const RDXQuoteCard: ReactiveCards.FC<{ title?: string }> = ({
           <column verticalContentAlignment="Center" width={2}>
             {texts.map((text, i) => (
               <text key={i} height="stretch" horizontalAlignment="Left" wrap>
-                *&#8220;{text}&#8221;*
+                *&#8220;
+                {text}
+                &#8221;*
               </text>
             ))}
             {lastText && (

@@ -3,11 +3,11 @@
   "description": "Reactive Dialog Language Transpilers",
   "version": "0.5.31",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c ./config/rollup.config.js",
     "lint": "berun-scripts lint"
   },
   "main": "dist/transpile.js",
-  "typings": "src/index.ts",
+  "types": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
@@ -30,7 +30,7 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.7.4",
     "@babel/plugin-transform-typescript": "^7.7.4",
-    "@berun/dev-scripts": "^2.0.25",
+    "@berun/dev-scripts": "^3.0.6",
     "@betit/rollup-plugin-rename-extensions": "^0.0.4",
     "@rdx-js/rdx": "0.5.31",
     "rollup": "^1.27.4",

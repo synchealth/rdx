@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import * as HAST from 'hast-format'
 import * as MDAST from 'mdast'
 import { Node, Parent } from 'unist'
@@ -6,8 +7,7 @@ import detab from 'detab'
 import collapseWhiteSpace from 'collapse-white-space'
 import u from 'unist-builder'
 import trimLines from 'trim-lines'
-import {
-  default as toHAST,
+import toHAST, {
   H,
   wrap,
   all,
@@ -33,9 +33,7 @@ export default function toRDHast() {
       /** pass through imports */
       import(h, node) {
         // pass through
-        return Object.assign({}, node, {
-          type: 'import'
-        })
+        return { ...node, type: 'import' }
       },
 
       /** convert h1 to dialog, ignore h2+ -- future use card titles (TODO) */
@@ -59,23 +57,23 @@ export default function toRDHast() {
 
       /** convert paragraph to prompt  */
       paragraph(h: H, node: MDAST.Paragraph & Node, parent: Node) {
-        if (parent.type == 'root') {
-          var raw = all(h, node)
+        if (parent.type === 'root') {
+          const raw = all(h, node)
           //
           // promote actionset and images to replace parent paragraph
           //
-          if (raw.length == 1) {
+          if (raw.length === 1) {
             const firstChild = raw[0]
             if (
-              firstChild.tagName == 'action' ||
-              firstChild.tagName == 'image'
+              firstChild.tagName === 'action' ||
+              firstChild.tagName === 'image'
             ) {
               return firstChild
             }
           }
           return h(node, 'text', raw)
         }
-        if (parent.type == 'listItem') {
+        if (parent.type === 'listItem') {
           return h(node, 'text', all(h, node))
         }
         const value = allText(h, node).join('\n')
@@ -84,16 +82,18 @@ export default function toRDHast() {
 
       /** convert list to actionset (or utterances if not in root == flow/dialog)  */
       list(h: H, node: MDAST.List & Parent, parent: Node): HAST.Element | null {
-        var props: any = {}
+        const props: any = {}
 
-        if (node.ordered) props.ordered = true
+        if (node.ordered) {
+          props.ordered = true
+        }
 
-        var name =
-          parent.type == 'root'
+        const name =
+          parent.type === 'root'
             ? 'actionset'
-            : parent.type == 'listItem'
-              ? 'utterances'
-              : null
+            : parent.type === 'listItem'
+            ? 'utterances'
+            : null
 
         if (typeof node.start === 'number' && node.start !== 1) {
           props.start = node.start
@@ -106,7 +106,7 @@ export default function toRDHast() {
 
       /** images are represented similarly in both trees */
       image(h: H, node: MDAST.Image & Node) {
-        var props: HAST.Properties = {
+        const props: HAST.Properties = {
           url: mdurlEncode(node.url),
           altText: node.alt
         }
@@ -120,17 +120,16 @@ export default function toRDHast() {
 
       /** convert listitem to action  */
       listItem(h: H, node: MDAST.ListItem & Node, parent: MDAST.List & Parent) {
-        var raw = all(h, node)
-        var props: HAST.Properties = {}
-        var result
-        var index
-        var length
-        var child
-        var childlength
-        var childindex
+        const raw = all(h, node)
+        let props: HAST.Properties = {}
+        let result
+        let index
+        let child
+        let childlength
+        let childindex
 
         result = []
-        length = raw.length
+        const { length } = raw
         index = -1
 
         while (++index < length) {
@@ -141,7 +140,7 @@ export default function toRDHast() {
             childindex = -1
 
             while (++childindex < childlength) {
-              if (child.children[childindex].tagName == 'action') {
+              if (child.children[childindex].tagName === 'action') {
                 result = result.concat(child.children[0].children)
                 props = Object.assign(props, child.children[0].properties)
               } else {
@@ -153,13 +152,15 @@ export default function toRDHast() {
 
             const flat = flatten(child.children)
 
-            flat.forEach(child => {
-              if (child.type == 'text') {
-                if (!child.value.startsWith('\n')) {
-                  results.push(child.value)
+            flat.forEach(flatchild => {
+              if (flatchild.type === 'text') {
+                if (!flatchild.value.startsWith('\n')) {
+                  results.push(flatchild.value)
                 }
-              } else if (child.tagName == 'action') {
-                child.children.forEach(subchild => results.push(subchild.value))
+              } else if (flatchild.tagName === 'action') {
+                flatchild.children.forEach(subchild =>
+                  results.push(subchild.value)
+                )
               }
             })
 
@@ -180,13 +181,16 @@ export default function toRDHast() {
 
       /** convert links to actions */
       link(h: H, node: MDAST.Link & Node, parent: Parent) {
-
-        if (parent.children.length > 1 && (parent.children[0].type == 'text' || parent.children[parent.children.length - 1].type == 'text')) {
+        if (
+          parent.children.length > 1 &&
+          (parent.children[0].type === 'text' ||
+            parent.children[parent.children.length - 1].type === 'text')
+        ) {
           const title = node.title || allText(h, node).join(' ')
           return h.augment(node, u('text', `[${title}](${node.url})`))
         }
 
-        var props: HAST.Properties = {
+        const props: HAST.Properties = {
           url: mdurlEncode(node.url),
           type: 'openurl'
         }
@@ -200,9 +204,9 @@ export default function toRDHast() {
 
       /** included code as is as long as 'live' is included after language name */
       code(h: H, node: MDAST.Code & Node) {
-        var value = node.value ? detab(node.value + '\n') : ''
-        var lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
-        var props: HAST.Properties = {}
+        const value = node.value ? detab(`${node.value}\n`) : ''
+        const lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/)
+        const props: HAST.Properties = {}
 
         if (lang) {
           props.lang = lang
@@ -219,6 +223,7 @@ export default function toRDHast() {
           node.meta.split(' ').reduce((acc, cur) => {
             if (cur.split('=').length > 1) {
               const t = cur.split('=')
+              // eslint-disable-next-line prefer-destructuring
               acc[t[0]] = t[1]
               return acc
             }
@@ -235,16 +240,13 @@ export default function toRDHast() {
 
         if (props.live) {
           return u('code', props, value)
-        } else {
-          return null
         }
+        return null
       },
 
       /** pass jsx through as is */
       jsx(h, node) {
-        return Object.assign({}, node, {
-          type: 'jsx'
-        })
+        return { ...node, type: 'jsx' }
       },
 
       /** follow html conventions for delete emphasis and strong */
@@ -269,14 +271,16 @@ export default function toRDHast() {
 
       /** image references are formatted similarly to images with url, altText */
       imageReference(h: H, node: MDAST.ImageReference & Node) {
-        var def = h.definition(node.identifier)
-        var props
+        const def = h.definition(node.identifier)
 
         if (!def) {
           return revert(h, node)
         }
 
-        props = { url: mdurlEncode(def.url || ''), altText: node.alt }
+        const props: { url: string; altText: string; title?: string } = {
+          url: mdurlEncode(def.url || ''),
+          altText: node.alt
+        }
 
         if (def.title !== null && def.title !== undefined) {
           props.title = def.title
@@ -307,9 +311,7 @@ export default function toRDHast() {
 
       /** pass through exports as is */
       export(h, node) {
-        return Object.assign({}, node, {
-          type: 'export'
-        })
+        return { ...node, type: 'export' }
       },
 
       /** pass comments through as is */
@@ -320,14 +322,11 @@ export default function toRDHast() {
       /** parse yaml properties */
       yaml(_h, node) {
         const props = node.value.split('\n').reduce((accum, x) => {
-          let parts = x.split(/:(.+)/)
-          return Object.assign(
-            {},
-            {
-              [parts[0] ? parts[0].trim() : '']: parts[1] ? parts[1].trim() : ''
-            },
-            accum
-          )
+          const parts = x.split(/:(.+)/)
+          return {
+            [parts[0] ? parts[0].trim() : '']: parts[1] ? parts[1].trim() : '',
+            ...accum
+          }
         }, {})
 
         return u('yaml', { properties: props })
@@ -335,21 +334,15 @@ export default function toRDHast() {
 
       /** pass through tables as is */
       table(h, node) {
-        return Object.assign({}, node, {
-          type: 'table'
-        })
+        return { ...node, type: 'table' }
       },
 
       tableRow(h, node) {
-        return Object.assign({}, node, {
-          type: 'tableRow'
-        })
+        return { ...node, type: 'tableRow' }
       },
 
       tableCell(h, node) {
-        return Object.assign({}, node, {
-          type: 'tableCell'
-        })
+        return { ...node, type: 'tableCell' }
       }
     }
 
@@ -372,9 +365,9 @@ function flatten(node) {
 }
 
 function flattenAll(children) {
-  var results = []
-  var length = children.length
-  var index = -1
+  let results = []
+  const { length } = children
+  let index = -1
 
   while (++index < length) {
     results = results.concat(flatten(children[index]))

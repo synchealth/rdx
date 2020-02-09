@@ -1,22 +1,20 @@
-const unified = require('unified')
-
 // Third Party Remark Plugins (to MDAST)
 import toMDAST from 'remark-parse'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkSqueeze from 'remark-squeeze-paragraphs'
 
 // Custom RDX Remark Plugins (to RDAST)
-import {
-  default as toRDAST,
+import toRDAST, {
   mdJsxComments,
   mdJsxImportExport,
   mdJsxTemplateVariables
 } from '@rdx-js/language-md-mdast'
 
 // Convert RDAST to RDHAST (Remark -> Rehype)
+import hastFormat from 'rehype-format'
+import unified from 'unified'
 import toRDHAST from './rdx-mdast-to-rdhast'
 import compactDialogs from './rdx-rdhast-dialog-compact'
-import hastFormat from 'rehype-format'
 
 // Custom RDX Rehype Compilers
 import { compile as toJSX } from './rdx-rdhast-to-jsx'
@@ -29,7 +27,7 @@ const DEFAULT_OPTIONS = {
 }
 
 export function createRdxCompiler(options) {
-  const remarkPlugins = options.remarkPlugins
+  const { remarkPlugins } = options
   const plugins = remarkPlugins
 
   //
@@ -64,8 +62,8 @@ export function createRdxCompiler(options) {
   // PROCESS WITH REHYPE PLUGINS FOR HAST / RDHAST
   //
 
-  const rehypePlugins = options.rehypePlugins
-  const compilers = options.compilers
+  const { rehypePlugins } = options
+  const { compilers } = options
 
   rehypePlugins.forEach(plugin => {
     // Handle [plugin, pluginOptions] syntax
@@ -82,15 +80,15 @@ export function createRdxCompiler(options) {
 
   fn.use(toJSX, options)
 
-  for (const compilerPlugin of compilers) {
+  compilers.forEach(compilerPlugin => {
     fn.use(compilerPlugin, options)
-  }
+  })
 
   return fn
 }
 
 export function rdxSync(rdx, options) {
-  const opts = Object.assign({}, DEFAULT_OPTIONS, options)
+  const opts = { ...DEFAULT_OPTIONS, ...options }
   const compiler = createRdxCompiler(opts)
 
   const fileOpts: any = { contents: rdx }
@@ -103,7 +101,7 @@ export function rdxSync(rdx, options) {
 }
 
 export async function rdxAsync(rdx, options: any = {}) {
-  const opts = Object.assign({}, DEFAULT_OPTIONS, options)
+  const opts = { ...DEFAULT_OPTIONS, ...options }
   const compiler = createRdxCompiler(opts)
 
   const fileOpts: any = { contents: rdx }

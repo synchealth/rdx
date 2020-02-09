@@ -1,5 +1,7 @@
+/* eslint-disable class-methods-use-this */
 import { WorkFlowContext, File, Plugin } from 'fuse-box'
-const rdx = require('@rdx-js/rdx')
+
+import { rdx } from '@rdx-js/rdx'
 
 export interface RDXPluginOptions {
   remarkPlugins?: any[]
@@ -7,7 +9,7 @@ export interface RDXPluginOptions {
 }
 
 export class FuseBoxRDXPlugin implements Plugin {
-  public test: RegExp = /\.(md|rdx)$/
+  public test = /\.(md|rdx)$/
 
   public options: RDXPluginOptions = {
     remarkPlugins: [],
@@ -24,7 +26,7 @@ export class FuseBoxRDXPlugin implements Plugin {
   }
 
   public async transform(file: File) {
-    const context = file.context
+    const { context } = file
 
     if (context.useCache) {
       if (file.loadFromCache()) {
@@ -36,7 +38,7 @@ export class FuseBoxRDXPlugin implements Plugin {
 
     const result = await rdx(file.contents, this.options)
 
-    file.contents = result
+    file.contents = result.toString()
   }
 }
 

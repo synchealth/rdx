@@ -8,16 +8,16 @@ export const RDXMemeCard: ReactiveCards.FC<{ title?: string }> = ({
   const elements = ReactiveCards.Children.toArray(children)
 
   const texts = elements
-    .filter(child => child.type == 'text')
+    .filter(child => child.type === 'text')
     .map(text => text.props.children.join(' '))
 
   const images = elements
-    .filter(child => child.type == 'image')
+    .filter(child => child.type === 'image')
     .map(image => image.props.url)
 
-  const actionset = elements.find(child => child.type == 'actionset')
+  const actionset = elements.find(child => child.type === 'actionset')
   const actions = elements
-    .filter(child => child.type == 'action')
+    .filter(child => child.type === 'action')
     .concat(
       actionset ? ReactiveCards.Children.toArray(actionset.props.children) : []
     )
@@ -27,7 +27,7 @@ export const RDXMemeCard: ReactiveCards.FC<{ title?: string }> = ({
   return (
     <card backgroundImage={images[0]} version="1.2" style="default">
       <body>
-        <container minHeight="300px" >
+        <container minHeight="300px">
           <text
             fontType="default"
             size="extraLarge"

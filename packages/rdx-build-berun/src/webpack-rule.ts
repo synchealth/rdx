@@ -1,13 +1,14 @@
-'use strict'
+import Berun from '@berun/berun'
 
 /**
  * TDX Loader
  */
-module.exports.ruleMainDocs = (berun, options) => {
+export const ruleMainDocs = (berun: Berun) => {
   const main = berun.webpack.module.rule('main')
 
-  if (main.oneOfs.has('static'))
+  if (main.oneOfs.has('static')) {
     main.oneOf('static').exclude.add(/\.(?:md|rdx)$/)
+  }
 
   main
     .oneOf('markdown')
