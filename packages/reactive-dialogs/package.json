@@ -3,11 +3,12 @@
   "version": "0.5.31",
   "description": "Renders interactive dialog based JSX components to Reactive Card JSON on the server and in the browser.",
   "main": "dist/index.js",
+  "ts:main": "src/index.ts",
   "types": "types/index.d.ts",
-  "scripts": {
-    "build": "rm -rf ./dist && tsc",
-    "lint": "berun-scripts lint"
-  },
+  "authors": [
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
   "keywords": [
     "html",
     "hyperscript",
@@ -18,23 +19,23 @@
     "strings",
     "react"
   ],
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "authors": [
-    "Sync Health Labs <labs@noreply.sync.health>",
-    "Internet of Protocols Association"
-  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
   },
-  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "lint": "berun-scripts lint"
+  },
   "dependencies": {
-    "reactive-cards": "0.5.32"
+    "reactive-cards": "^0.5.32"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.6"
+    "@berun/dev-scripts": "^3.0.14"
   },
   "peerDependencies": {}
 }

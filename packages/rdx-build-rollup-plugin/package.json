@@ -1,16 +1,17 @@
 {
   "name": "@rdx-js/build-rollup-plugin",
   "version": "0.5.31",
-  "scripts": {
-    "build": "tsc",
-    "lint": "berun-dev lint"
-  },
   "main": "dist/index.js",
+  "ts:main": "src/index.ts",
   "types": "src/index.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
-  },
+  "authors": [
+    "Tinia Labs",
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "md",
     "rdx",
@@ -18,29 +19,29 @@
     "config",
     "api"
   ],
-  "files": [
-    "dist"
-  ],
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "authors": [
-    "Tinia Labs",
-    "Sync Health Labs <labs@noreply.sync.health>",
-    "Internet of Protocols Association"
-  ],
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "berun-dev lint"
+  },
   "dependencies": {
     "@betit/rollup-plugin-rename-extensions": "^0.0.4",
-    "@rdx-js/rdx": "0.5.31",
+    "@rdx-js/rdx": "^0.5.31",
     "matched": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-sucrase": "^2.1.0",
-    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-terser": "^5.2.0",
     "rollup-pluginutils": "^2.8.2"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.6"
+    "@berun/dev-scripts": "^3.0.14"
   },
   "peerDependencies": {}
 }

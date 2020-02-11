@@ -3,20 +3,13 @@
   "version": "0.5.32",
   "description": "Renders JSX components to Adaptive Card JSON on the server and in the browser.",
   "main": "dist/index.js",
+  "ts:main": "src/index.ts",
   "types": "types/index.d.ts",
-  "scripts": {
-    "build": "rm -rf ./dist && tsc",
-    "lint": "berun-scripts lint"
-  },
   "authors": [
     "Guy Barnard",
     "Sync Health Labs <labs@noreply.sync.health>",
     "Internet of Protocols Association"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
-  },
   "keywords": [
     "html",
     "hyperscript",
@@ -26,13 +19,21 @@
     "renderer",
     "strings"
   ],
+  "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "lint": "berun-scripts lint"
+  },
   "dependencies": {},
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.6"
+    "@berun/dev-scripts": "^3.0.14"
   },
   "peerDependencies": {}
 }

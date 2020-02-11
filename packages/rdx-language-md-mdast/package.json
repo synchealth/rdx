@@ -2,24 +2,14 @@
   "name": "@rdx-js/language-md-mdast",
   "version": "0.5.31",
   "description": "Convert RDX Markdown to Unist Markdown AST (MDAST)",
-  "scripts": {
-    "build": "tsc",
-    "lint": "berun-dev lint"
-  },
   "main": "dist/index.js",
+  "ts:main": "src/index.ts",
   "types": "src/index.ts",
   "authors": [
     "Tinia Labs",
     "Sync Health Labs <labs@noreply.sync.health>",
     "Internet of Protocols Association"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "markdown",
     "react",
@@ -28,12 +18,23 @@
     "rdxast"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "berun-dev lint"
+  },
   "dependencies": {
     "character-parser": "^3.1.0",
     "unist-util-visit": "^1.4.1"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.6"
+    "@berun/dev-scripts": "^3.0.14"
   },
   "peerDependencies": {}
 }

@@ -2,11 +2,19 @@
   "name": "@rdx-js/build-berun",
   "version": "0.5.31",
   "description": "BeRun runner for building RDX packs",
-  "scripts": {
-    "lint": "berun-dev lint"
-  },
   "main": "dist/index.js",
+  "ts:main": "src/index.ts",
   "types": "src/index.ts",
+  "authors": [
+    "Tinia Labs",
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
+  "engines": {
+    "node": ">=8.3",
+    "npm": ">=5.4.0",
+    "yarn": ">=1.2.1"
+  },
   "keywords": [
     "berun",
     "berun-preset",
@@ -19,38 +27,34 @@
     "hot module replacement",
     "create react app"
   ],
-  "authors": [
-    "Tinia Labs",
-    "Sync Health Labs <labs@noreply.sync.health>",
-    "Internet of Protocols Association"
-  ],
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
   },
-  "engines": {
-    "node": ">=8.3",
-    "npm": ">=5.4.0",
-    "yarn": ">=1.2.1"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
   "resolutions": {
     "babel-core": "^7.0.0-bridge.0"
   },
+  "scripts": {
+    "lint": "berun-dev lint"
+  },
   "dependencies": {
-    "@berun/fluent": "^3.0.6",
-    "@berun/fuse-box-plugin-babel": "^3.0.6",
-    "@berun/runner-babel": "^3.0.6",
-    "@rdx-js/build-fuse-box-plugin": "0.5.31",
+    "@berun/berun": "^3.0.11",
+    "@berun/fluent": "^3.0.11",
+    "@berun/fuse-box-plugin-babel": "^3.0.11",
+    "@berun/runner-babel": "^3.0.11",
+    "@rdx-js/build-fuse-box-plugin": "^0.5.31",
+    "@rdx-js/build-webpack-loader": "^0.5.31",
+    "babel-loader": "^8.0.6",
     "remark-emoji": "^2.0.2",
     "remark-images": "^1.0.0"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.6",
-    "@berun/preset-react": "^3.0.6"
+    "@berun/dev-scripts": "^3.0.14",
+    "@berun/preset-react": "^3.0.11"
   },
   "peerDependencies": {}
 }

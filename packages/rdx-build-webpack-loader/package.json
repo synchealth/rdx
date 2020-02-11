@@ -1,9 +1,16 @@
 {
   "name": "@rdx-js/build-webpack-loader",
   "version": "0.5.31",
-  "main": "index.js",
   "description": "Webpack loader for Markdown, RDX, and RCX files",
-  "license": "MIT",
+  "main": "index.js",
+  "authors": [
+    "Tinia Labs",
+    "Sync Health Labs <labs@noreply.sync.health>",
+    "Internet of Protocols Association"
+  ],
+  "jest": {
+    "testEnvironment": "node"
+  },
   "keywords": [
     "rdx",
     "rcx",
@@ -18,31 +25,21 @@
     "webpack",
     "loader"
   ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
   },
-  "authors": [
-    "Tinia Labs",
-    "Sync Health Labs <labs@noreply.sync.health>",
-    "Internet of Protocols Association"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "index.js"
-  ],
   "scripts": {},
-  "jest": {
-    "testEnvironment": "node"
-  },
   "dependencies": {
-    "@rdx-js/rdx": "0.5.31",
+    "@rdx-js/rdx": "^0.5.31",
     "loader-utils": "^1.2.3"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.6"
+    "@berun/dev-scripts": "^3.0.14"
   },
   "peerDependencies": {}
 }
