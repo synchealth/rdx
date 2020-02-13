@@ -35,7 +35,7 @@
     "reactive-cards": "^0.5.32"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.14"
+    "@berun/dev-scripts": "^3.0.17"
   },
   "peerDependencies": {}
 }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable */
 import * as ReactiveCards from 'reactive-cards'
 
 export = ReactiveDialogs

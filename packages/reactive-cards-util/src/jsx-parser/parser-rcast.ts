@@ -8,45 +8,48 @@ export function parserRCast(
   let token = tokens[current]
 
   const parseProps = () => {
-    let props: object = {}
+    const props: object = {}
     let key: string | null = null
     let last: string | null = null
 
     while (
       current < tokens.length &&
-      token.type != 'endTag' &&
-      token.type != 'closeTag'
+      token.type !== 'endTag' &&
+      token.type !== 'closeTag'
     ) {
-      if (last && token.type == 'word') {
+      if (last && token.type === 'word') {
         props[last] = true
         last = token.value
-      } else if (!key && token.type == 'word') {
+      } else if (!key && token.type === 'word') {
         last = token.value
-      } else if (last && token.type == 'equals') {
+      } else if (last && token.type === 'equals') {
         key = last
         last = null
-      } else if (key && token.type == 'code') {
+      } else if (key && token.type === 'code') {
         //
         if (opts.useEval) {
           throw new Error('useEval Not implemented')
         }
-        ;(props[key] = '{' + token.value + '}'), (key = null)
+        props[key] = `{${token.value}}`
+        key = null
         last = null
       } else if (
         key &&
-        (token.type == 'number' ||
-          token.type == 'text' ||
-          token.type == 'boolean')
+        (token.type === 'number' ||
+          token.type === 'text' ||
+          token.type === 'boolean')
       ) {
         props[key] = token.value
         key = null
         last = null
       } else {
-        throw `Invalid property value: ${key}=${token.value}`
+        throw new Error(`Invalid property value: ${key}=${token.value}`)
       }
       token = tokens[++current]
     }
-    if (last) props[last] = true
+    if (last) {
+      props[last] = true
+    }
     return props
   }
 
@@ -62,18 +65,20 @@ export function parserRCast(
   const getChildren: (tagType?: string) => ReactiveCards.RCastChild[] = (
     tagType?: string
   ) => {
-    let children: any[] = []
+    const children: any[] = []
     while (current < tokens.length) {
-      if (token.type == 'endTag') {
-        if (token.value && token.value != tagType) {
-          throw `Invalid closing tag: ${token.value}. Expected closing tag of type: ${tagType}`
+      if (token.type === 'endTag') {
+        if (token.value && token.value !== tagType) {
+          throw new Error(
+            `Invalid closing tag: ${token.value}. Expected closing tag of type: ${tagType}`
+          )
         } else {
           break
         }
       }
-      if (token.type == 'openTag') {
+      if (token.type === 'openTag') {
         children.push(genNode(token.value))
-      } else if (token.type == 'text') {
+      } else if (token.type === 'text') {
         children.push(token.value)
       }
       token = tokens[++current]
@@ -82,7 +87,9 @@ export function parserRCast(
   }
 
   const result = getChildren()
-  if (result.length == 1) return result[0]
+  if (result.length === 1) {
+    return result[0]
+  }
   return result
 }
 

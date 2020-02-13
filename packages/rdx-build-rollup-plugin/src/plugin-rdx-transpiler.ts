@@ -15,7 +15,9 @@ export default function rdxTranspiler(options: any = {}) {
       if (!fileRegex.test(id)) {
         return null
       }
-      if (!filter(id)) return null
+      if (!filter(id)) {
+        return null
+      }
 
       const result = rdxSync(code, {})
 

@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-case-declarations */
 /** @jsx ReactiveCards.h */
 import * as ReactiveCards from 'reactive-cards'
 

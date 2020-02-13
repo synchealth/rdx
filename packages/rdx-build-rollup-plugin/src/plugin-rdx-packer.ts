@@ -1,44 +1,45 @@
 import matched from 'matched'
 
-declare const require: any, process: any
+declare const require: any
+declare const process: any
 
 const path = require('path')
+
 const cwd = process.cwd()
 const entry = path.resolve(cwd, './src/index.js')
 const { name, version } = require(path.resolve(process.cwd(), './package.json'))
 
-export default function rdxPacker() {
-  var config =
-    arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null
-  var include = []
-  var exclude = []
+export default function rdxPacker(...args) {
+  const config = args.length > 0 && args[0] !== undefined ? args[0] : null
+  let include = []
+  let exclude = []
 
-  var importer = function importer(path) {
+  const importer = function importer(path) {
     const id = path
-      .replace(/^.*[\\\/]/, '')
-      .replace(/  /, ' ')
+      .replace(/^.*[\\/]/, '')
+      .replace(/ {2}/, ' ')
       .replace(/.md$/, '')
       .replace(/\([0-9]+\)/g, '')
       .replace(/\./g, '-')
       .toLowerCase()
-    const idCamel = id.replace(/[_\-\s]([a-z0-9])/g, function(g) {
-      return g[1].toUpperCase()
+    const idCamel = id.replace(/[_\-\s]([a-z0-9])/g, match => {
+      return match[1].toUpperCase()
     })
     return `import { meta as meta_${idCamel}, rdx as rdx_${idCamel} } from ${JSON.stringify(
       path
     )};`
   }
 
-  var exporter = function exporter(path) {
+  const exporter = function exporter(path) {
     const id = path
-      .replace(/^.*[\\\/]/, '')
-      .replace(/  /, ' ')
+      .replace(/^.*[\\/]/, '')
+      .replace(/ {2}/, ' ')
       .replace(/.md$/, '')
       .replace(/\([0-9]+\)/g, '')
       .replace(/\./g, '-')
       .toLowerCase()
-    const idCamel = id.replace(/[_\-\s]([a-z0-9])/g, function(g) {
-      return g[1].toUpperCase()
+    const idCamel = id.replace(/[_\-\s]([a-z0-9])/g, match => {
+      return match[1].toUpperCase()
     })
     return `  "${id}": { meta: meta_${idCamel}, rdx: rdx_${idCamel} }`
   }
@@ -71,6 +72,7 @@ export default function rdxPacker() {
       if (id === entry) {
         return entry // this signals that rollup should not ask other plugins or check the file system to find this id
       }
+      return undefined
     },
 
     load(id) {
@@ -80,9 +82,9 @@ export default function rdxPacker() {
           return Promise.resolve('')
         }
 
-        var patterns = include.concat(
-          exclude.map(function(pattern) {
-            return '!' + pattern
+        const patterns = include.concat(
+          exclude.map(pattern => {
+            return `!${pattern}`
           })
         )
 
@@ -90,7 +92,7 @@ export default function rdxPacker() {
           .promise(patterns, {
             realpath: true
           })
-          .then(function(paths) {
+          .then(paths => {
             const result = `${paths.map(importer).join('\n')}
         
 export const pack = {

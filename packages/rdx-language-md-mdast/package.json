@@ -34,7 +34,7 @@
     "unist-util-visit": "^1.4.1"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.14"
+    "@berun/dev-scripts": "^3.0.17"
   },
   "peerDependencies": {}
 }

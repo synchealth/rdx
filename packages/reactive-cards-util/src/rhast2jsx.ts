@@ -1,6 +1,6 @@
 import format from 'rehype-format'
-import escapeString from './util/escape-string'
 import { RHastNode, RHastCode, RHastText, RHastElement } from 'reactive-cards'
+import escapeString from './util/escape-string'
 
 const EMPTY_OBJECT = Object.freeze({})
 
@@ -8,9 +8,9 @@ const EMPTY_OBJECT = Object.freeze({})
 export function rhast2jsx(tree: RHastNode): string {
   const paddedTree = format()(tree)
 
-  if (paddedTree.tagName == 'card') {
+  if (paddedTree.tagName === 'card') {
     if (
-      paddedTree.properties.$schema ==
+      paddedTree.properties.$schema ===
       'http://adaptivecards.io/schemas/adaptive-card.json'
     ) {
       delete paddedTree.properties.$schema
@@ -23,65 +23,67 @@ export function rhast2jsx(tree: RHastNode): string {
 function renderToJSX(element: RHastNode): string {
   if (typeof element === 'string') {
     return element
-  } else if (typeof element === 'number') {
+  }
+  if (typeof element === 'number') {
     return `${element}`
-  } else if (typeof element === 'boolean' || element == null) {
+  }
+  if (typeof element === 'boolean' || element == null) {
     return `{${element}}`
   }
 
-  if ((element as RHastText).type == 'text') {
-    const value = (element as RHastText).value
+  if ((element as RHastText).type === 'text') {
+    const { value } = element as RHastText
 
     if (typeof value === 'string') {
       return value
-    } else if (typeof value === 'number') {
+    }
+    if (typeof value === 'number') {
       return `${value}`
-    } else if (typeof value === 'boolean' || value == null) {
+    }
+    if (typeof value === 'boolean' || value == null) {
       return `{${value}}`
     }
 
     return value
-  } else if ((element as RHastCode).type == 'code') {
-    return `{${(element as RHastCode).value}}`
-  } else {
-    element = element as RHastElement
-
-    const tagName = element.tagName
-
-    const properties = element.properties || EMPTY_OBJECT
-
-    let jsx = `<${tagName}`
-
-    for (const prop in properties) {
-      const value = properties[prop]
-
-      if (prop === 'children' || prop === 'key' || prop === 'ref') {
-        // skip
-      } else {
-        if (typeof value === 'string') {
-          jsx += ` ${prop}="${escapeString(value)}"`
-        } else if (typeof value === 'number') {
-          jsx += ` ${prop}={${String(value)}}`
-        } else if (typeof value === 'boolean' && value) {
-          jsx += ` ${prop}`
-        } else if (typeof value === 'object' && value && value.type == 'code') {
-          jsx += ` ${prop}={${value}}`
-        }
-      }
-    }
-
-    if (!element.children) {
-      throw new Error('Children in HAST must be an array')
-    }
-
-    if (element.children.length > 0) {
-      jsx += '>'
-      jsx += element.children.map(child => renderToJSX(child)).join('')
-      jsx += `</${tagName}>`
-    } else {
-      jsx += ` />`
-    }
-
-    return jsx
   }
+  if ((element as RHastCode).type === 'code') {
+    return `{${(element as RHastCode).value}}`
+  }
+  element = element as RHastElement
+
+  const { tagName } = element
+
+  const properties = element.properties || EMPTY_OBJECT
+
+  let jsx = `<${tagName}`
+
+  Object.keys(properties).forEach(prop => {
+    const value = properties[prop]
+
+    if (prop === 'children' || prop === 'key' || prop === 'ref') {
+      // skip
+    } else if (typeof value === 'string') {
+      jsx += ` ${prop}="${escapeString(value)}"`
+    } else if (typeof value === 'number') {
+      jsx += ` ${prop}={${String(value)}}`
+    } else if (typeof value === 'boolean' && value) {
+      jsx += ` ${prop}`
+    } else if (typeof value === 'object' && value && value.type === 'code') {
+      jsx += ` ${prop}={${value}}`
+    }
+  })
+
+  if (!element.children) {
+    throw new Error('Children in HAST must be an array')
+  }
+
+  if (element.children.length > 0) {
+    jsx += '>'
+    jsx += element.children.map(child => renderToJSX(child)).join('')
+    jsx += `</${tagName}>`
+  } else {
+    jsx += ` />`
+  }
+
+  return jsx
 }

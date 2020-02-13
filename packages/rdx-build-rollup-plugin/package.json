@@ -41,7 +41,7 @@
     "rollup-pluginutils": "^2.8.2"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.14"
+    "@berun/dev-scripts": "^3.0.17"
   },
   "peerDependencies": {}
 }

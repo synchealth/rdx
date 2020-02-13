@@ -33,7 +33,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.14"
+    "@berun/dev-scripts": "^3.0.17"
   },
   "peerDependencies": {}
 }

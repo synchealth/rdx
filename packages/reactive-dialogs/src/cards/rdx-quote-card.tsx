@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/no-array-index-key */
 /** @jsx ReactiveCards.h */
 import * as ReactiveCards from 'reactive-cards'
 

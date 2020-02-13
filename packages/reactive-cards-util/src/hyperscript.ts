@@ -7,11 +7,11 @@ export function h(type, props_, ...children_) {
   ).filter(Boolean)
 
   if (type && type.defaultProps) {
-    for (const prop in type.defaultProps) {
+    Object.keys(type.defaultProps).forEach(prop => {
       if (props[prop] === undefined) {
         props[prop] = type.defaultProps[prop]
       }
-    }
+    })
   }
 
   const { children, ...rest } = props
