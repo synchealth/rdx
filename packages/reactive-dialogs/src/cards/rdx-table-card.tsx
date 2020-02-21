@@ -2,6 +2,7 @@
 /** @jsx ReactiveCards.h */
 import * as ReactiveCards from 'reactive-cards'
 
+export const ReactiveCardsFix = ReactiveCards
 interface RDXTableCard {
   title?: string
   subheading?: string

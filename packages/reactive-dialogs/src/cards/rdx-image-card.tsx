@@ -1,6 +1,7 @@
 /** @jsx ReactiveCards.h */
 import * as ReactiveCards from 'reactive-cards'
 
+export const ReactiveCardsFix = ReactiveCards
 export const RDXImageCard: ReactiveCards.FC<{
   src: string
   altText?: string

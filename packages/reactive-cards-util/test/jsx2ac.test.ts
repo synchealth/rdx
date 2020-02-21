@@ -1,4 +1,5 @@
 import { render as rcast2ac } from 'reactive-cards'
+import * as Adaptive from 'adaptivecards'
 import { jsx2rcast } from '../src/jsx2rcast'
 
 const jsx = `<card version="1.0">
@@ -21,16 +22,14 @@ const jsx = `<card version="1.0">
 </actionset>
 </card>`
 
-import * as Adaptive from 'adaptivecards'
-let card: Adaptive.AdaptiveCard
-card = new Adaptive.AdaptiveCard()
+const card = new Adaptive.AdaptiveCard()
 
 const component = jsx2rcast(jsx)
 console.log(JSON.stringify(component, null, 2))
 const cardjson = rcast2ac(component, null)
 console.log(JSON.stringify(cardjson, null, 2))
 
-card.parse(cardjson, [])
+card.parse(cardjson)
 const result: any = card.toJSON() as any
 console.log('-----')
 console.log(JSON.stringify(cardjson, null, 2))

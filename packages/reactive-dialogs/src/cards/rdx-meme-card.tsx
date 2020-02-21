@@ -1,6 +1,7 @@
 /** @jsx ReactiveCards.h */
 import * as ReactiveCards from 'reactive-cards'
 
+export const ReactiveCardsFix = ReactiveCards
 export const RDXMemeCard: ReactiveCards.FC<{ title?: string }> = ({
   title,
   children

@@ -3,6 +3,7 @@
 /** @jsx ReactiveCards.h */
 import * as ReactiveCards from 'reactive-cards'
 
+export const ReactiveCardsFix = ReactiveCards
 export const RDXQuoteCard: ReactiveCards.FC<{ title?: string }> = ({
   title,
   children
