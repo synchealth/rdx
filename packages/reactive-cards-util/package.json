@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "reactive-cards": "^0.5.32",
-    "rehype-format": "^2.3.2"
+    "rehype-minify-whitespace": "^3.0.0",
+    "repeat-string": "^1.6.1",
+    "unist-util-visit-parents": "^3.0.2"
   },
   "devDependencies": {
     "adaptivecards": "^1.2.5",

@@ -1,12 +1,12 @@
-import format from 'rehype-format'
 import { RHastNode, RHastCode, RHastText, RHastElement } from 'reactive-cards'
+import format from './jsx-format'
 import escapeString from './util/escape-string'
 
 const EMPTY_OBJECT = Object.freeze({})
 
 /* Compile ReactiveCards HAST (Html-Like Abstract Syntax Tree) to JSX source code */
-export function rhast2jsx(tree: RHastNode): string {
-  const paddedTree = format()(tree)
+export function rhast2jsx(tree: RHastNode, padding = true): string {
+  const paddedTree = padding ? format()(tree) : tree
 
   if (paddedTree.tagName === 'card') {
     if (

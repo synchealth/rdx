@@ -1,4 +1,4 @@
-import { RCastNode, RHastNode, RCastElement } from 'reactive-cards'
+import { RCastNode, RHastNode, RCastElement, RHastChild } from 'reactive-cards'
 
 const { Fragment } = require('reactive-cards')
 
@@ -7,7 +7,7 @@ const EMPTY_OBJECT = Object.freeze({})
 /* Transform Reactive Cards Abstract Syntax Tree to ReactiveCards HAST (Html-Like Abstract Syntax Tree) */
 export function rcast2rhast(
   element: RCastNode
-): RHastNode | RHastNode[] | null {
+): RHastNode | RHastNode[] | RHastChild | null {
   const props = (element as RCastElement).props || EMPTY_OBJECT
 
   if (typeof element === 'string') {

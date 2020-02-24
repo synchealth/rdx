@@ -4,6 +4,7 @@ export { jsx2rcast } from './jsx2rcast'
 export { rcast2rhast } from './rcast2rhast'
 export { rhast2hyperscript } from './rhast2hyperscript'
 export { h as hyperscript } from './hyperscript'
+export { json2jsx, jsx2json } from './json-jsx'
 
 export {
   render as rcast2ac,

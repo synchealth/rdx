@@ -17,6 +17,10 @@ export const CLASS_ALIASES = {
   actionset: 'ActionSet'
 }
 
+export const IMPLICIT_ALIASES = { 'Input.Choice': 'choice' }
+
+export const RAW_ALIASES = { speak: 'speak' }
+
 export const ATTR_ALIASES: { [k: string]: string } = {
   /* intentionally left blank */
 }

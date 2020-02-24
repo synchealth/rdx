@@ -1,21 +1,23 @@
+import { rhast2jsx, rcast2rhast } from 'reactive-cards-util'
 import {
   ATTR_ALIASES,
   CHILDREN_PROPS,
   CHILDREN_TEXT_PROPS,
   CLASS_ALIASES,
+  IMPLICIT_ALIASES,
   PROMOTE_ALIASES,
+  RAW_ALIASES,
   SPLIT_ALIASES
 } from './util/constants'
 import { toArray } from './util/children'
 import { toAbsoluteUrl } from './util'
+import { RHastChild } from '../types'
 
 // important must use commonjs required Symbol in case running under webpack
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Fragment } = require('./fragment')
 
 const EMPTY_OBJECT = Object.freeze({})
-
-declare const document: any
 
 const AbsoluteRegExp = new RegExp('^(?:[a-z]+:)', 'i')
 
@@ -126,7 +128,6 @@ export default function renderToObject(
       const result: any = {}
 
       let { children } = props // always an array
-
       if (children.length > 0 && type in PROMOTE_ALIASES) {
         const MY_PROMOTE_ALIASES = PROMOTE_ALIASES[type]
         const promote = children.filter(
@@ -138,15 +139,22 @@ export default function renderToObject(
           )
 
           promote.forEach((child, i) => {
-            const childresult = renderToObject(
-              child.props.children,
-              resourceRoot,
-              element
-            )
-            result[MY_PROMOTE_ALIASES[child.type]] =
-              childresult.length === 1 && typeof childresult[0] !== 'object'
-                ? childresult[0]
-                : childresult
+            if (child.type in RAW_ALIASES) {
+              result[MY_PROMOTE_ALIASES[child.type]] = rhast2jsx(
+                rcast2rhast(child.props.children[0] || {}) as RHastChild,
+                false
+              )
+            } else {
+              const childresult = renderToObject(
+                child.props.children,
+                resourceRoot,
+                element
+              )
+              result[MY_PROMOTE_ALIASES[child.type]] =
+                childresult.length === 1 && typeof childresult[0] !== 'object'
+                  ? childresult[0]
+                  : childresult
+            }
           })
         }
       }
@@ -175,6 +183,20 @@ export default function renderToObject(
         }
 
         result[CHILDREN_PROPS[type]] = toArray(children)
+      } else if (children.length > 0 && props.type in CHILDREN_PROPS) {
+        const firstchild = children[0]
+
+        if (typeof firstchild === null) {
+          children = []
+        } else if (
+          typeof firstchild === 'string' ||
+          typeof firstchild === 'number' ||
+          typeof firstchild === 'boolean'
+        ) {
+          children = firstchild
+        }
+
+        result[CHILDREN_PROPS[props.type]] = toArray(children)
       } else if (children.length > 0 && type in CHILDREN_TEXT_PROPS) {
         const firstchild = children.join('')
 
@@ -206,7 +228,7 @@ export default function renderToObject(
           children = firstchild
         }
 
-        result[firstchild.type] = toArray(children)
+        result[firstchild.type || 'value'] = toArray(children)
       }
 
       result.type = newType
@@ -226,6 +248,10 @@ export default function renderToObject(
           result[name] = value
         }
       })
+
+      if (result.type && IMPLICIT_ALIASES[result.type]) {
+        delete result.type
+      }
 
       return result
     }

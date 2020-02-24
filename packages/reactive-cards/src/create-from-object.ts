@@ -40,7 +40,13 @@ function createFromObject(element, _parent) {
     return result
   }
 
-  const { type } = element
+  let { type } = element
+
+  if (!type) {
+    if ('value' in element && 'title' in element) {
+      type = 'Input.Choice'
+    }
+  }
 
   if (type && typeof type === 'string') {
     const result: any = {
@@ -121,7 +127,10 @@ function createFromObject(element, _parent) {
 
     return result
   }
-  throw new Error(`Invalid card element type`)
+
+  console.error(`Warning invalid card element type ${JSON.stringify(element)}`)
+  return element
+  // throw new Error(`Invalid card element type ${JSON.stringify(element)}`)
 }
 
 export default createFromObject
