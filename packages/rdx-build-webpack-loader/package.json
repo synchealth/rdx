@@ -36,10 +36,10 @@
   "scripts": {},
   "dependencies": {
     "@rdx-js/rdx": "^0.5.31",
-    "loader-utils": "^1.2.3"
+    "loader-utils": "^1.4.0"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.17"
+    "@berun/dev-scripts": "^3.0.18"
   },
   "peerDependencies": {}
 }

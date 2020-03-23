@@ -13,7 +13,7 @@
   "devDependencies": {
     "rimraf": "^3.0.2",
     "tslint": "^5.18.0",
-    "typescript": "3.7.5",
+    "typescript": "3.8.3",
     "ts-node": "^8.3.0",
     "@berun/dev-scripts": "^3.0.6"
     },
@@ -27,7 +27,7 @@
   "resolutions": {
     "babel-core": "7.0.0-bridge.0",
     "@babel/core": "7.4.5",
-    "typescript": "3.7.5"
+    "typescript": "3.8.3"
   },
   "workspaces": [
 		"packages/*"

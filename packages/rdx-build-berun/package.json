@@ -42,19 +42,19 @@
     "lint": "berun-dev lint"
   },
   "dependencies": {
-    "@berun/berun": "^3.0.14",
-    "@berun/fluent": "^3.0.14",
-    "@berun/fuse-box-plugin-babel": "^3.0.14",
-    "@berun/runner-babel": "^3.0.14",
+    "@berun/berun": "^3.0.15",
+    "@berun/fluent": "^3.0.15",
+    "@berun/fuse-box-plugin-babel": "^3.0.15",
+    "@berun/runner-babel": "^3.0.15",
     "@rdx-js/build-fuse-box-plugin": "^0.5.31",
     "@rdx-js/build-webpack-loader": "^0.5.31",
-    "babel-loader": "^8.0.6",
-    "remark-emoji": "^2.0.2",
+    "babel-loader": "^8.1.0",
+    "remark-emoji": "^2.1.0",
     "remark-images": "^1.0.0"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.17",
-    "@berun/preset-react": "^3.0.14"
+    "@berun/dev-scripts": "^3.0.18",
+    "@berun/preset-react": "^3.0.15"
   },
   "peerDependencies": {}
 }

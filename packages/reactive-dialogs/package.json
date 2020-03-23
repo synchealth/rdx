@@ -3,8 +3,8 @@
   "version": "0.5.31",
   "description": "Renders interactive dialog based JSX components to Reactive Card JSON on the server and in the browser.",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
   "ts:main": "src/index.ts",
+  "types": "types/index.d.ts",
   "authors": [
     "Sync Health Labs <labs@noreply.sync.health>",
     "Internet of Protocols Association"
@@ -35,7 +35,7 @@
     "reactive-cards": "^0.5.32"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.17"
+    "@berun/dev-scripts": "^3.0.18"
   },
   "peerDependencies": {}
 }
