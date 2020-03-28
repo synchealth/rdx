@@ -36,7 +36,7 @@
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/plugin-transform-modules-commonjs": "^7.9.0",
     "@babel/plugin-transform-typescript": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-env": "^7.8.7",
     "@berun/berun": "^3.0.15",
     "@berun/fluent": "^3.0.15",
     "@berun/fluent-babel": "^3.0.15",
