@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@rdx-js/rdx": "^0.5.31",
-    "sucrase": "^3.12.1"
+    "sucrase": "^3.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
