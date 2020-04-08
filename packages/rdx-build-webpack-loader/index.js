@@ -9,7 +9,7 @@ module.exports = async content => {
   let result
 
   try {
-    result = await rdx(content, options)
+    result = await rdx(content, options).content
   } catch (err) {
     return callback(err)
   }

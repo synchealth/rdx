@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-webpack-loader",
-  "version": "0.5.31",
+  "version": "1.0.0",
   "description": "Webpack loader for Markdown, RDX, and RCX files",
   "main": "index.js",
   "authors": [
@@ -35,7 +35,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@rdx-js/rdx": "^0.5.31",
+    "@rdx-js/rdx": "^1.0.0",
     "loader-utils": "^1.4.0"
   },
   "devDependencies": {

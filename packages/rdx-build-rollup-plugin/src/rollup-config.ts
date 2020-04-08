@@ -26,7 +26,10 @@ export default [
       resolve({
         extensions: ['.js', '.ts']
       }),
-      rdxTranspiler(),
+      rdxTranspiler({
+        writeManifest: true,
+        manifestPackageJson: './package.json'
+      }),
       renameExtensions({
         mappings: {
           '.md': '.js',
@@ -44,7 +47,7 @@ export default [
   },
   {
     preserveModules: true,
-    input: './src/*.md',
+    input: ['./src/*.md'],
     external,
     output: [
       {
@@ -55,7 +58,10 @@ export default [
     plugins: [
       rdxPacker(),
       resolve(),
-      rdxTranspiler(),
+      rdxTranspiler({
+        writeManifest: true,
+        manifestPackageJson: './package.json'
+      }),
       renameExtensions({
         mappings: {
           '.md': '.js',
@@ -65,7 +71,7 @@ export default [
       sucrase({
         jsxPragma: 'h',
         production: true,
-        exclude: ['node_modules/**'],
+        exclude: ['node_modules/**', 'package.json'],
         transforms: ['jsx', 'typescript']
       })
     ]

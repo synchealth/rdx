@@ -113,7 +113,7 @@ Include any references or installation notes here, as well as any extra imports 
 `
 
 const asyncTest = async () => {
-  const result = await rdx(halt, 'test.md')
+  const { content: result } = await rdx(halt, 'test.md')
   console.log(result)
 }
 

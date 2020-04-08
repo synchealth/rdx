@@ -36,7 +36,7 @@ export class FuseBoxRDXPlugin implements Plugin {
 
     file.loadContents()
 
-    const result = await rdx(file.contents, this.options)
+    const { content: result } = await rdx(file.contents, this.options)
 
     file.contents = result.toString()
   }

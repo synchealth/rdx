@@ -96,7 +96,13 @@ export function rdxSync(rdx, options) {
     fileOpts.path = opts.filepath
   }
 
-  const { contents } = compiler.processSync(fileOpts)
+  const { contents } = (compiler.processSync(fileOpts) as unknown) as {
+    contents: {
+      content: string
+      meta: { [key: string]: any }
+    }
+  }
+
   return contents
 }
 
@@ -109,6 +115,11 @@ export async function rdxAsync(rdx, options: any = {}) {
     fileOpts.path = opts.filepath
   }
 
-  const { contents } = await compiler.process(fileOpts)
+  const { contents } = ((await compiler.process(fileOpts)) as unknown) as {
+    contents: {
+      content: string
+      meta: { [key: string]: any }
+    }
+  }
   return contents
 }

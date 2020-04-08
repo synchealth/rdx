@@ -355,8 +355,30 @@ ${JSON.stringify(table[id], null, 2)}
   return null
 }
 
-export function compile(this: any, options = {}) {
+export function toYaml(
+  node,
+  parentNode: any = {},
+  options: {
+    filename?: string
+  } = {}
+): any {
+  if (node.type === 'root') {
+    let yaml: { id?: any; [key: string]: any } = {}
+
+    node.children.forEach(childNode => {
+      if (childNode.type === 'yaml') {
+        yaml = Object.assign(yaml, childNode.properties)
+      }
+    })
+    return yaml
+  }
+  return {}
+}
+
+export function compile(this: any, options: any = {}) {
   this.Compiler = tree => {
-    return toJSX(tree, {}, options)
+    const content = toJSX(tree, {}, options)
+    const meta = toYaml(tree, {}, options)
+    return { content, meta }
   }
 }

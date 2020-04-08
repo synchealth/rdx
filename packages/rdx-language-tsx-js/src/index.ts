@@ -2,7 +2,7 @@ import { rdx } from '@rdx-js/rdx'
 import { transform } from 'sucrase'
 
 export default async function rdxAsync(src, filename) {
-  const interim: any = await rdx(src, {
+  const { content: interim, meta } = await rdx(src, {
     skipImport: true,
     skipExport: true,
     filename
@@ -13,10 +13,10 @@ export default async function rdxAsync(src, filename) {
     transforms: ['typescript', 'imports', 'jsx']
   })
   if (!code) {
-    return code
+    return { content: code, meta }
   }
   const newCode = `return ${code.substr(
     '"use strict";/** @jsx h */\n\n'.length
   )}`
-  return newCode
+  return { content: newCode, meta }
 }

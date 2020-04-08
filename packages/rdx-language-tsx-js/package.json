@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/language-tsx-js",
-  "version": "0.5.31",
+  "version": "1.0.0",
   "description": "Reactive Dialog Language Transpilers",
   "main": "dist/transpile.js",
   "ts:main": "src/index.ts",
@@ -28,14 +28,14 @@
     "lint": "berun-scripts lint"
   },
   "dependencies": {
-    "@rdx-js/rdx": "^0.5.31",
+    "@rdx-js/rdx": "^1.0.0",
     "sucrase": "^3.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/plugin-transform-modules-commonjs": "^7.9.0",
-    "@babel/plugin-transform-typescript": "^7.9.0",
+    "@babel/plugin-transform-typescript": "^7.9.4",
     "@babel/preset-env": "^7.8.7",
     "@berun/berun": "^3.0.15",
     "@berun/fluent": "^3.0.15",
@@ -44,14 +44,14 @@
     "@berun/runner-prettier": "^3.0.15",
     "@berun/runner-web-polyfills": "^3.0.15",
     "@berun/runner-webpack": "^3.0.15",
-    "@rdx-js/build-berun": "^0.5.31",
+    "@rdx-js/build-berun": "^1.0.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "@berun/dev-scripts": "^3.0.18",
     "@betit/rollup-plugin-rename-extensions": "^0.0.4",
-    "@rdx-js/rdx": "^0.5.31",
+    "@rdx-js/rdx": "^1.0.0",
     "rollup": "^1.32.1",
     "rollup-plugin-terser": "^5.3.0"
   },

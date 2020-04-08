@@ -116,7 +116,7 @@ Remember, you are <card>sasdadasd</card> not your feelings! Let feelings arise a
 Include any references or installation notes here, as well as any extra imports or exports for the embedded React code, if any`
 
 const t0 = performance.now()
-const item = rdxSync(src)
+const { content: item, meta } = rdxSync(src)
 const t1 = performance.now()
 
 console.log(item)

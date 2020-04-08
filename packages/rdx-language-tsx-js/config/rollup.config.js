@@ -15,6 +15,7 @@ export default {
     }
   ],
   plugins: [
+    commonjs(),
     resolve(),
     json(),
     babel({
@@ -33,8 +34,7 @@ export default {
       highlightCode: true,
       compact: true,
       extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx']
-    }),
-    commonjs()
+    })
     // terser()
   ]
 }
