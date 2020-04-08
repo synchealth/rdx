@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-rollup-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
   "types": "src/index.ts",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@betit/rollup-plugin-rename-extensions": "^0.0.4",
-    "@rdx-js/rdx": "^1.0.0",
+    "@rdx-js/rdx": "^1.0.1",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@rollup/plugin-sucrase": "^3.0.0",
     "@rollup/pluginutils": "^3.0.8",
@@ -42,6 +42,5 @@
   },
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19"
-  },
-  "peerDependencies": {}
+  }
 }
