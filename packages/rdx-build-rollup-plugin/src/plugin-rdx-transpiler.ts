@@ -1,5 +1,5 @@
 import { rdxSync } from '@rdx-js/rdx'
-import { createFilter } from 'rollup-pluginutils'
+import { createFilter } from '@rollup/pluginutils'
 import * as path from 'path'
 import * as fs from 'fs'
 

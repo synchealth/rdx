@@ -36,7 +36,8 @@
     "fuse-box": "^3.7.1"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.18",
+    "@berun/dev-scripts": "^3.0.19",
     "fuse-box": "3.7.1"
-  }
+  },
+  "peerDependencies": {}
 }

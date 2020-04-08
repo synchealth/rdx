@@ -1,5 +1,5 @@
-import resolve from 'rollup-plugin-node-resolve'
-import sucrase from 'rollup-plugin-sucrase'
+import resolve from '@rollup/plugin-node-resolve'
+import sucrase from '@rollup/plugin-sucrase'
 import renameExtensions from '@betit/rollup-plugin-rename-extensions'
 import { terser } from 'rollup-plugin-terser'
 import { rdxTranspiler, rdxPacker } from './index'

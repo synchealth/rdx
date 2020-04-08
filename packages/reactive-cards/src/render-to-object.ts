@@ -11,7 +11,7 @@ import {
 } from './util/constants'
 import { toArray } from './util/children'
 import { toAbsoluteUrl } from './util'
-import { RHastChild } from '../types'
+import { RHastChild } from '../types/index'
 
 // important must use commonjs required Symbol in case running under webpack
 // eslint-disable-next-line @typescript-eslint/no-var-requires
