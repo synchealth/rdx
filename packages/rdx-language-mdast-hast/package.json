@@ -42,5 +42,6 @@
   },
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19"
-  }
+  },
+  "peerDependencies": {}
 }
