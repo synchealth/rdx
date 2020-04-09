@@ -1,7 +1,7 @@
 import { rdxSync } from '@rdx-js/rdx'
 import { createFilter } from '@rollup/pluginutils'
 import * as path from 'path'
-import * as fs from 'fs'
+import * as fs from 'fs-extra'
 
 export interface RdxTranspilerOptions {
   remarkPlugins?: any[]
@@ -139,7 +139,7 @@ export default function rdxTranspilerWithMeta(
         if (!fs.existsSync(targetDir)) {
           fs.mkdirSync(targetDir, { recursive: true })
         }
-        await fs.promises.writeFile(filePathManifest, manifestStr)
+        await fs.writeFile(filePathManifest, manifestStr)
       }
     }
   }
@@ -152,7 +152,7 @@ export async function readJSON<T = object>(
     flag?: string | undefined
   } = { encoding: 'utf-8', flag: 'r' }
 ) {
-  const content = await fs.promises.readFile(path, option)
+  const content = await fs.readFile(path, option)
   const json: T = JSON.parse(content as string)
   return json
 }
