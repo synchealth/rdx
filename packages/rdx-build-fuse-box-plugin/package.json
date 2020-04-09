@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-fuse-box-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
   "types": "src/index.ts",
@@ -32,12 +32,11 @@
     "lint": "berun-dev lint"
   },
   "dependencies": {
-    "@rdx-js/rdx": "^1.0.1",
+    "@rdx-js/rdx": "^1.0.2",
     "fuse-box": "^3.7.1"
   },
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19",
     "fuse-box": "3.7.1"
-  },
-  "peerDependencies": {}
+  }
 }
