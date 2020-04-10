@@ -1,6 +1,6 @@
-import { rcast2rhast } from '../src/rcast2rhast'
+import { rcast2rhast } from '../src/index'
 
-import { default as h } from '../../reactive-cards/src/create-element'
+import h from '../../reactive-cards/src/create-element'
 
 const rcast = h(
   'card',
@@ -73,6 +73,6 @@ const rcast = h(
     })
   )
 )
-var el = rcast2rhast(rcast as any)
+const el = rcast2rhast(rcast as any)
 
 console.log(JSON.stringify(el, null, 2))

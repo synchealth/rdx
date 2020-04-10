@@ -1,6 +1,5 @@
 import { createFromObject } from 'reactive-cards'
-import { rcast2rhast } from '../src/rcast2rhast'
-import { rhast2jsx } from '../src/rhast2jsx'
+import { rcast2rhast, rhast2jsx } from '../src/index'
 
 const item = {
   speak: "Tom's Pie is a Pizza restaurant which is rated 9.3 by customers.",
@@ -64,7 +63,7 @@ const item = {
   version: '1.0'
 }
 
-const rcast = createFromObject(item, null)
+const rcast = createFromObject(item)
 console.log(JSON.stringify(rcast, null, 2))
 
 const rhast = rcast2rhast(rcast)

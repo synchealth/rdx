@@ -55,5 +55,6 @@
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19",
     "@berun/preset-react": "^3.0.16"
-  }
+  },
+  "peerDependencies": {}
 }

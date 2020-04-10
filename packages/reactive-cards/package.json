@@ -31,7 +31,9 @@
     "build": "rm -rf ./dist && tsc",
     "lint": "berun-scripts lint"
   },
+  "dependencies": {},
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19"
-  }
+  },
+  "peerDependencies": {}
 }
