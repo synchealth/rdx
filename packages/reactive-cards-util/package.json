@@ -1,6 +1,6 @@
 {
   "name": "reactive-cards-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
   "types": "src/index.ts",
@@ -21,7 +21,7 @@
     "lint": "berun-scripts lint"
   },
   "dependencies": {
-    "reactive-cards": "^1.0.3",
+    "reactive-cards": "^1.0.4",
     "rehype-minify-whitespace": "^3.0.0",
     "repeat-string": "^1.6.1",
     "unist-util-visit-parents": "^2.1.2"

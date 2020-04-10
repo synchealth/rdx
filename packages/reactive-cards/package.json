@@ -1,6 +1,6 @@
 {
   "name": "reactive-cards",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Renders JSX components to Adaptive Card JSON on the server and in the browser.",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
@@ -31,9 +31,7 @@
     "build": "rm -rf ./dist && tsc",
     "lint": "berun-scripts lint"
   },
-  "dependencies": {},
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19"
-  },
-  "peerDependencies": {}
+  }
 }
