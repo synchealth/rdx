@@ -1,6 +1,5 @@
+import { h } from 'reactive-cards'
 import { rcast2rhast } from '../src/index'
-
-import h from '../../reactive-cards/src/create-element'
 
 const rcast = h(
   'card',

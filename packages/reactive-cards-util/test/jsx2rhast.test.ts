@@ -22,6 +22,6 @@ const item = `<card>
 </actionset>
 </card>`
 
-var el = jsx2rhast(item)
+const el = jsx2rhast(item)
 
 console.log(JSON.stringify(el, null, 2))

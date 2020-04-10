@@ -1,5 +1,5 @@
-import { rcast2ac } from '../src'
 import { h } from 'reactive-cards'
+import { rcast2ac } from '../src'
 
 const rcast = h(
   'card',
@@ -72,6 +72,6 @@ const rcast = h(
     })
   )
 )
-var result = rcast2ac(rcast as any)
+const result = rcast2ac(rcast as any)
 
 console.log(JSON.stringify(result, null, 2))

@@ -1,5 +1,5 @@
 import h from 'hastscript'
-import { rhast2jsx } from '../src/rhast2jsx'
+import { rhast2jsx } from '../src/index'
 
 const hast = h(
   'card',
