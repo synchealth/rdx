@@ -1,4 +1,5 @@
-import { rhast2jsx, rcast2rhast } from 'reactive-cards-util'
+import { rhast2jsx } from './util/rhast2jsx'
+import { rcast2rhast } from './util/rcast2rhast'
 import {
   ATTR_ALIASES,
   CHILDREN_PROPS,
@@ -10,8 +11,8 @@ import {
   SPLIT_ALIASES
 } from './util/constants'
 import { toArray } from './util/children'
-import { toAbsoluteUrl } from './util'
-import { RHastChild } from '../types/index'
+import { toAbsoluteUrl } from './util/to-absolute-url'
+import { RHastChild, RHastElement } from '../types/index'
 
 // important must use commonjs required Symbol in case running under webpack
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -141,8 +142,7 @@ export default function renderToObject(
           promote.forEach((child, i) => {
             if (child.type in RAW_ALIASES) {
               result[MY_PROMOTE_ALIASES[child.type]] = rhast2jsx(
-                rcast2rhast(child.props.children[0] || {}) as RHastChild,
-                false
+                rcast2rhast(child.props.children[0] || {}) as RHastElement
               )
             } else {
               const childresult = renderToObject(

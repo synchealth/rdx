@@ -6,8 +6,11 @@ import renderToObject, {
 } from './render-to-object'
 import createFromObject from './create-from-object'
 import { toArray } from './util/children'
+import { rhast2jsx } from './util/rhast2jsx'
+import { rcast2rhast } from './util/rcast2rhast'
 
 const Children = { toArray }
+const util = { rcast2rhast, rhast2jsx }
 
 export {
   Fragment,
@@ -18,5 +21,6 @@ export {
   renderToObject as render,
   createFromObject,
   Children,
-  setLocalResourceProtocolMapper
+  setLocalResourceProtocolMapper,
+  util
 }

@@ -1,26 +1,23 @@
-import { RHastNode, RHastCode, RHastText, RHastElement } from 'reactive-cards'
-import format from './jsx-format'
-import escapeString from './util/escape-string'
+import { RHastNode, RHastCode, RHastText, RHastElement } from '../../types'
+import escapeString from './escape-string'
 
 const EMPTY_OBJECT = Object.freeze({})
 
 /* Compile ReactiveCards HAST (Html-Like Abstract Syntax Tree) to JSX source code */
-export function rhast2jsx(tree: RHastNode, padding = true): string {
-  const paddedTree = padding ? format()(tree) : tree
-
-  if (paddedTree.tagName === 'card') {
+export function rhast2jsx(tree: RHastElement): string {
+  if (tree.tagName === 'card') {
     if (
-      paddedTree.properties.$schema ===
+      tree.properties.$schema ===
       'http://adaptivecards.io/schemas/adaptive-card.json'
     ) {
-      delete paddedTree.properties.$schema
+      delete tree.properties.$schema
     }
   }
 
-  return renderToJSX(paddedTree)
+  return renderToJSX(tree)
 }
 
-function renderToJSX(element: RHastNode): string {
+export function renderToJSX(element: RHastNode): string {
   if (typeof element === 'string') {
     return element
   }

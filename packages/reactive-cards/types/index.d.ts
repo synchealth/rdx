@@ -31,6 +31,14 @@ declare namespace ReactiveCards {
     mapper: (partialUrl: string) => string
   ): void
 
+  namespace util {
+    function rcast2rhast(
+      element: RCastNode
+    ): RHastNode | RHastNode[] | RHastChild | null
+
+    function rhast2jsx(tree: RHastElement): string
+  }
+
   function toArray(
     x: any
   ): {

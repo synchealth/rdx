@@ -31,9 +31,7 @@
     "build": "rm -rf ./dist && tsc",
     "lint": "berun-scripts lint"
   },
-  "dependencies": {
-    "reactive-cards-util": "^1.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19"
   },

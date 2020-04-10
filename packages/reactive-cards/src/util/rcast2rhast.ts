@@ -1,6 +1,6 @@
-import { RCastNode, RHastNode, RCastElement, RHastChild } from 'reactive-cards'
+import { RCastNode, RHastNode, RCastElement, RHastChild } from '../../types'
 
-const { Fragment } = require('reactive-cards')
+import { Fragment } from '../fragment'
 
 const EMPTY_OBJECT = Object.freeze({})
 
@@ -50,7 +50,7 @@ export function rcast2rhast(
     children: newChildren
   } as ReactiveCards.RHastElement
 
-  if (result.tagName === Fragment) {
+  if ((result.tagName as any) === Fragment) {
     result.tagName = 'ReactiveCards.Fragment'
   }
 
