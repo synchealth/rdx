@@ -42,7 +42,7 @@
     "lint": "berun-dev lint"
   },
   "dependencies": {
-    "@berun/berun": "^3.0.16",
+    "@berun/berun": "^3.0.18",
     "@berun/fluent": "^3.0.16",
     "@berun/fuse-box-plugin-babel": "^3.0.16",
     "@berun/runner-babel": "^3.0.16",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@berun/dev-scripts": "^3.0.19",
-    "@berun/preset-react": "^3.0.16"
+    "@berun/preset-react": "^3.0.19"
   },
   "peerDependencies": {}
 }
