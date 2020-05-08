@@ -214,11 +214,6 @@ export default function renderToObject(
       } else if (children.length === 1) {
         const firstchild = children[0]
 
-        if (!firstchild) {
-          // eslint-disable-next-line no-debugger
-          debugger
-        }
-
         if (
           typeof firstchild === 'string' ||
           typeof firstchild === 'number' ||
