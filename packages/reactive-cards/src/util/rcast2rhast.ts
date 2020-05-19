@@ -1,4 +1,10 @@
-import { RCastNode, RHastNode, RCastElement, RHastChild } from '../../types'
+import {
+  RCastNode,
+  RHastNode,
+  RCastElement,
+  RHastChild,
+  RHastElement
+} from './types'
 
 import { Fragment } from '../fragment'
 
@@ -31,11 +37,11 @@ export function rcast2rhast(
     return rcast2rhast(element.type(props))
   }
   const { children, ...rest } = props as any
-  let newChildren: ReactiveCards.RHastChild[]
+  let newChildren: RHastChild[]
 
   if (children && Array.isArray(children)) {
     newChildren = children
-      ? (children.map(child => rcast2rhast(child)).filter(Boolean) as any)
+      ? (children.map((child) => rcast2rhast(child)).filter(Boolean) as any)
       : []
   } else if (children) {
     newChildren = [children]
@@ -48,7 +54,7 @@ export function rcast2rhast(
     tagName: element.type,
     properties: rest,
     children: newChildren
-  } as ReactiveCards.RHastElement
+  } as RHastElement
 
   if ((result.tagName as any) === Fragment) {
     result.tagName = 'ReactiveCards.Fragment'

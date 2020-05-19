@@ -1,7 +1,7 @@
-import { Node } from 'unist'
-import * as HAST from 'hast-format'
-import * as MDAST from 'mdast'
-import { H } from '../index'
+import type { Node } from 'unist'
+import type * as HAST from 'hast-format'
+import type * as MDAST from 'mdast'
+import type { H } from '../index'
 
 export function thematicBreak(
   h: H,

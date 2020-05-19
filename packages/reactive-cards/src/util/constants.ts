@@ -106,7 +106,7 @@ export const DEFAULTS = {
 
 export function objectFlip(obj) {
   const ret = {}
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     ret[obj[key]] = key
   })
   return ret
@@ -114,7 +114,7 @@ export function objectFlip(obj) {
 
 export function categoryObjectFlip(obj) {
   const ret = {}
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     ret[CLASS_ALIASES[key]] = objectFlip(obj[key])
   })
   return ret
@@ -122,9 +122,9 @@ export function categoryObjectFlip(obj) {
 
 export function heirarchyObjectFlip(obj) {
   const ret = {}
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     const child = obj[key]
-    Object.keys(child).forEach(childkey => {
+    Object.keys(child).forEach((childkey) => {
       ret[child[childkey]] = { type: key, subtype: childkey }
     })
   })

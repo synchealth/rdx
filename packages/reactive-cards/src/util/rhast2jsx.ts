@@ -1,4 +1,4 @@
-import { RHastNode, RHastCode, RHastText, RHastElement } from '../../types'
+import { RHastNode, RHastCode, RHastText, RHastElement } from './types'
 import escapeString from './escape-string'
 
 const EMPTY_OBJECT = Object.freeze({})
@@ -54,7 +54,7 @@ export function renderToJSX(element: RHastNode): string {
 
   let jsx = `<${tagName}`
 
-  Object.keys(properties).forEach(prop => {
+  Object.keys(properties).forEach((prop) => {
     const value = properties[prop]
 
     if (prop === 'children' || prop === 'key' || prop === 'ref') {
@@ -76,7 +76,7 @@ export function renderToJSX(element: RHastNode): string {
 
   if (element.children.length > 0) {
     jsx += '>'
-    jsx += element.children.map(child => renderToJSX(child)).join('')
+    jsx += element.children.map((child) => renderToJSX(child)).join('')
     jsx += `</${tagName}>`
   } else {
     jsx += ` />`

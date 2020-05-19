@@ -4,9 +4,9 @@ import collapseWhiteSpace from 'collapse-white-space'
 import u from 'unist-builder'
 import trimLines from 'trim-lines'
 
-import * as HAST from 'hast-format'
-import * as MDAST from 'mdast'
-import { Node, Parent } from 'unist'
+import type * as HAST from 'hast-format'
+import type * as MDAST from 'mdast'
+import type { Node, Parent } from 'unist'
 import { H, wrap, all, revert } from '../index'
 
 export const core = {

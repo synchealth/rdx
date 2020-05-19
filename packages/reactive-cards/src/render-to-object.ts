@@ -12,7 +12,7 @@ import {
 } from './util/constants'
 import { toArray } from './util/children'
 import { toAbsoluteUrl } from './util/to-absolute-url'
-import { RHastChild, RHastElement } from '../types/index'
+import { RHastChild, RHastElement } from './util/types'
 
 // important must use commonjs required Symbol in case running under webpack
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -113,7 +113,7 @@ export default function renderToObject(
         props.style /** uncomment to default to "positive" if needed: || 'positive' */
     }
 
-    Object.keys(props).forEach(prop => {
+    Object.keys(props).forEach((prop) => {
       if (prop.startsWith('__')) {
         delete props[prop]
       }
@@ -132,11 +132,11 @@ export default function renderToObject(
       if (children.length > 0 && type in PROMOTE_ALIASES) {
         const MY_PROMOTE_ALIASES = PROMOTE_ALIASES[type]
         const promote = children.filter(
-          child => child && child.type in MY_PROMOTE_ALIASES
+          (child) => child && child.type in MY_PROMOTE_ALIASES
         )
         if (promote.length > 0) {
           children = children.filter(
-            child => !(child && child.type in MY_PROMOTE_ALIASES)
+            (child) => !(child && child.type in MY_PROMOTE_ALIASES)
           )
 
           promote.forEach((child, i) => {
@@ -228,7 +228,7 @@ export default function renderToObject(
 
       result.type = newType
 
-      Object.keys(props).forEach(prop => {
+      Object.keys(props).forEach((prop) => {
         const value = props[prop]
 
         if (

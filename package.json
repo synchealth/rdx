@@ -13,23 +13,22 @@
   "devDependencies": {
     "rimraf": "^3.0.2",
     "tslint": "^5.18.0",
-    "typescript": "3.8.3",
+    "typescript": "3.9.2",
     "ts-node": "^8.3.0",
     "@berun/dev-scripts": "^3.0.6"
-    },
-    "scripts": {
-      "build": "lerna run build",
-      "clean": "rimraf **/build && rimraf **/dist && rimraf **/node_modules && rm -rf yarn.lock && rm -rf .fusebox",
-      "lint": "lerna run lint"
-    },
-  "dependencies": {
   },
+  "scripts": {
+    "build": "lerna run build",
+    "clean": "rimraf **/build && rimraf **/dist && rimraf **/node_modules && rm -rf yarn.lock && rm -rf .fusebox",
+    "lint": "lerna run lint"
+  },
+  "dependencies": {},
   "resolutions": {
     "babel-core": "7.0.0-bridge.0",
-    "@babel/core": "7.4.5",
-    "typescript": "3.8.3"
+    "@babel/core": "7.9.6",
+    "typescript": "3.9.2"
   },
   "workspaces": [
-		"packages/*"
-	]
+    "packages/*"
+  ]
 }

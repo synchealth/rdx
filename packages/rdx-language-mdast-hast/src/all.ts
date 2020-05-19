@@ -1,5 +1,5 @@
 import trim from 'trim'
-import { Node, Parent } from 'unist'
+import type { Node, Parent } from 'unist'
 import { one } from './one'
 import { H } from './Handler'
 

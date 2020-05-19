@@ -1,5 +1,5 @@
 import u from 'unist-builder'
-import { Node } from 'unist'
+import type { Node } from 'unist'
 
 /** Wrap `nodes` with line feeds between each entry.
     Optionally adds line feeds at the start and end. */

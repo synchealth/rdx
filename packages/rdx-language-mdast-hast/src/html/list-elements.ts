@@ -1,7 +1,7 @@
 import u from 'unist-builder'
-import * as HAST from 'hast-format'
-import * as MDAST from 'mdast'
-import { Parent, Node } from 'unist'
+import type * as HAST from 'hast-format'
+import type * as MDAST from 'mdast'
+import type { Parent, Node } from 'unist'
 import { H, wrap, all } from '../index'
 
 export function listItem(

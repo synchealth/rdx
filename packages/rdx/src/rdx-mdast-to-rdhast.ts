@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import * as HAST from 'hast-format'
-import * as MDAST from 'mdast'
-import { Node, Parent } from 'unist'
+import type * as HAST from 'hast-format'
+import type * as MDAST from 'mdast'
+import type { Node, Parent } from 'unist'
 import mdurlEncode from 'mdurl/encode'
 import detab from 'detab'
 import collapseWhiteSpace from 'collapse-white-space'
@@ -42,9 +42,7 @@ export default function toRDHast() {
           case 1:
           case 2:
             return h(node, 'dialog', {
-              title: allText(h, node)
-                .join(' ')
-                .toLowerCase()
+              title: allText(h, node).join(' ').toLowerCase()
             })
           case 4:
             return h(node, 'h4', {
@@ -152,19 +150,19 @@ export default function toRDHast() {
 
             const flat = flatten(child.children)
 
-            flat.forEach(flatchild => {
+            flat.forEach((flatchild) => {
               if (flatchild.type === 'text') {
                 if (!flatchild.value.startsWith('\n')) {
                   results.push(flatchild.value)
                 }
               } else if (flatchild.tagName === 'action') {
-                flatchild.children.forEach(subchild =>
+                flatchild.children.forEach((subchild) =>
                   results.push(subchild.value)
                 )
               }
             })
 
-            props.utterances = results.map(utterance =>
+            props.utterances = results.map((utterance) =>
               utterance.replace(/^["']/, '').replace(/["']$/, '')
             )
           } else {
@@ -233,7 +231,7 @@ export default function toRDHast() {
           }, {})
 
         if (meta) {
-          Object.keys(meta).forEach(key => {
+          Object.keys(meta).forEach((key) => {
             props[key] = meta[key]
           })
         }

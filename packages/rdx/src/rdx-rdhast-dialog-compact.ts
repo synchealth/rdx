@@ -1,7 +1,7 @@
 import visit from 'unist-util-visit'
 import filter from 'unist-util-filter'
 import findAllAfter from 'unist-util-find-all-after'
-import * as HAST from 'hast-format'
+import type * as HAST from 'hast-format'
 import u from 'unist-builder'
 
 // Make an rdhast tree compact by merging adjacent dialog nodes.

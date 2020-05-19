@@ -1,6 +1,6 @@
-import { Node } from 'unist'
-import * as HAST from 'hast-format'
-import * as MDAST from 'mdast'
+import type { Node } from 'unist'
+import type * as HAST from 'hast-format'
+import type * as MDAST from 'mdast'
 import position from 'unist-util-position'
 import { H, wrap, all } from '../index'
 

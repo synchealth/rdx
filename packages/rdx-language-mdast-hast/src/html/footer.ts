@@ -1,4 +1,4 @@
-import { Node } from 'unist'
+import type { Node } from 'unist'
 import * as MDAST from 'mdast'
 import { thematicBreak } from './thematic-break'
 import { list } from './list-elements'

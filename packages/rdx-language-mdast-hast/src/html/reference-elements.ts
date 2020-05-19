@@ -1,7 +1,7 @@
 import mdurlEncode from 'mdurl/encode'
 import u from 'unist-builder'
 import * as MDAST from 'mdast'
-import { Node } from 'unist'
+import type { Node } from 'unist'
 import { all, revert, H } from '../index'
 
 export const reference = {

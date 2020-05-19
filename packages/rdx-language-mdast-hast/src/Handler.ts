@@ -1,5 +1,5 @@
-import { Node, Parent } from 'unist'
-import * as HAST from 'hast-format'
+import type { Node, Parent } from 'unist'
+import type * as HAST from 'hast-format'
 
 export type Handler = (
   h: H,

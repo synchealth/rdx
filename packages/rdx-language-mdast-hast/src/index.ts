@@ -1,5 +1,5 @@
-import { Node, Parent } from 'unist'
-import * as HAST from 'hast-format'
+import type { Node, Parent } from 'unist'
+import type * as HAST from 'hast-format'
 
 import xtend from 'xtend'
 import u from 'unist-builder' // CJS ONLY

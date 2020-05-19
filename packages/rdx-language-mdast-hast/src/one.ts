@@ -1,5 +1,5 @@
 import u from 'unist-builder'
-import { Node, Parent } from 'unist'
+import type { Node, Parent } from 'unist'
 import { all } from './all'
 import { H } from './Handler'
 
