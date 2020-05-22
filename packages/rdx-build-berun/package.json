@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/build-berun",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "BeRun runner for building RDX packs",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",

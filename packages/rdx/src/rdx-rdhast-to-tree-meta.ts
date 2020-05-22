@@ -33,7 +33,7 @@ export function toQuestionsMeta(
 
   if (node.type === 'element' && node.tagName === 'dialog') {
     const [id, text] = processDialog(node)
-    if (id) {
+    if (id && text) {
       if (id in result) {
         throw new Error(
           `Duplicate question id ${id} with text ${result[id]} and ${text}`

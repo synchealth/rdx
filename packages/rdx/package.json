@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/rdx",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Parse RDX Markdown and transpile to Reactive Dialogs JSX",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",

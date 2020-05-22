@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/language-tsx-js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Reactive Dialog Language Transpilers",
   "main": "dist/transpile.js",
   "ts:main": "src/index.ts",
