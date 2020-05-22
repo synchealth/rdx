@@ -17,7 +17,8 @@ import toRDHAST from './rdx-mdast-to-rdhast'
 import compactDialogs from './rdx-rdhast-dialog-compact'
 
 // Custom RDX Rehype Compilers
-import { compile as toJSX } from './rdx-rdhast-to-jsx'
+import { compile as compileMeta } from './rdx-rdhast-to-tree-meta'
+import { compile as toJSX } from './rdx-tree-meta-to-jsx'
 
 const DEFAULT_OPTIONS = {
   footnotes: true,
@@ -42,7 +43,7 @@ export function createRdxCompiler(options) {
     .use(remarkSqueeze)
     .use(toRDAST, options)
 
-  plugins.forEach(plugin => {
+  plugins.forEach((plugin) => {
     if (Array.isArray(plugin) && plugin.length > 1) {
       fn.use(plugin[0], plugin[1])
     } else {
@@ -65,7 +66,7 @@ export function createRdxCompiler(options) {
   const { rehypePlugins } = options
   const { compilers } = options
 
-  rehypePlugins.forEach(plugin => {
+  rehypePlugins.forEach((plugin) => {
     // Handle [plugin, pluginOptions] syntax
     if (Array.isArray(plugin) && plugin.length > 1) {
       fn.use(plugin[0], plugin[1])
@@ -78,9 +79,10 @@ export function createRdxCompiler(options) {
   // COMPILE RDHAST TREE TO JSX STRING OR WITH OTHER COMPILERS
   //
 
+  fn.use(compileMeta, options)
   fn.use(toJSX, options)
 
-  compilers.forEach(compilerPlugin => {
+  compilers.forEach((compilerPlugin) => {
     fn.use(compilerPlugin, options)
   })
 

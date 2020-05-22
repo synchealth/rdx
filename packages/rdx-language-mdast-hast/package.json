@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/language-mdast-hast",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Convert RDX AST to HAST",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
@@ -41,7 +41,7 @@
     "xtend": "^4.0.2"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.19"
+    "@berun/dev-scripts": "^3.0.23"
   },
   "peerDependencies": {}
 }

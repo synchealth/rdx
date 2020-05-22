@@ -1,9 +1,9 @@
 /* eslint-disable no-control-regex */
-import { paramCase } from 'change-case'
+
 import remove from 'unist-util-remove'
 import escapeString from './util/escape-string'
 
-export const toTemplateLiteral = text => {
+export const toTemplateLiteral = (text) => {
   const escaped = text
     .replace(/\\/g, '\\\\') // Escape all "\" to avoid unwanted escaping in text nodes
     .replace(/`/g, '\\`') // Escape "`"" since
@@ -16,26 +16,6 @@ export const toTemplateLiteral = text => {
 }
 
 const EMPTY_OBJECT = Object.freeze({})
-
-const CARD_SHORTCUTS = {
-  TextCard: 'RDXCard',
-  MemeCard: 'RDXMemeCard',
-  QuoteCard: 'RDXQuoteCard'
-}
-
-function removeSections(tree) {
-  let section = 0
-
-  remove(tree, { cascade: true }, test)
-
-  function test(node) {
-    if (node.type === 'section') {
-      section++
-    }
-
-    return section > 1
-  }
-}
 
 export function toJSX(
   node,
@@ -57,26 +37,13 @@ export function toJSX(
 
   let children = ''
 
-  if (node.properties != null) {
-    const paramCaseRe = /^(aria[A-Z])|(data[A-Z])/
-    node.properties = Object.entries(node.properties!).reduce(
-      (properties, [key, value]) => ({
-        ...properties,
-        [paramCaseRe.test(key) ? paramCase(key) : key]: value
-      }),
-      {}
-    )
-  }
-
   if (node.type === 'root') {
-    removeSections(node)
-
     const importNodes: any[] = []
     const exportNodes: any[] = []
     const jsxNodes: any[] = []
     let yaml: { id?: any; [key: string]: any } = {}
 
-    node.children.forEach(childNode => {
+    node.children.forEach((childNode) => {
       if (childNode.type === 'yaml') {
         yaml = Object.assign(yaml, childNode.properties)
         return
@@ -100,11 +67,11 @@ export function toJSX(
     })
 
     const importStatements = importNodes
-      .map(childNode => toJSX(childNode, node))
+      .map((childNode) => toJSX(childNode, node))
       .join('\n')
 
     const exportStatements = exportNodes
-      .map(childNode => toJSX(childNode, node))
+      .map((childNode) => toJSX(childNode, node))
       .join('\n')
 
     const fn =
@@ -115,15 +82,16 @@ export function toJSX(
         ? `(props) => {
           return (
         <table id="${yaml.id || ''}" version={props.version} >
-        ${jsxNodes.map(childNode => toJSX(childNode, node)).join('')}
+        ${jsxNodes.map((childNode) => toJSX(childNode, node)).join('')}
         </table>
           )
         }`
         : `(props) => {
           return (
-        <flow id="${yaml.id ||
-          ''}" version={props.version} utterances={props.utterances} isGlobal={props.isGlobal} canLaunchFromGlobal={props.canLaunchFromGlobal}>
-        ${jsxNodes.map(childNode => toJSX(childNode, node)).join('')}
+        <flow id="${
+          yaml.id || ''
+        }" version={props.version} utterances={props.utterances} isGlobal={props.isGlobal} canLaunchFromGlobal={props.canLaunchFromGlobal}>
+        ${jsxNodes.map((childNode) => toJSX(childNode, node)).join('')}
         </flow>
           )
         }`
@@ -137,7 +105,7 @@ export function toJSX(
           )
           .concat(
             Object.keys(yaml)
-              .map(key =>
+              .map((key) =>
                 yaml[key] ? ` * ${key}: ${escapeString(yaml[key])}` : null
               )
               .filter(Boolean) as string[]
@@ -157,7 +125,7 @@ export function toJSX(
         .concat(['export const meta={'])
         .concat(
           Object.keys(yaml)
-            .map(key =>
+            .map((key) =>
               yaml[key] ? `  ${key}: "${escapeString(yaml[key])}",` : null
             )
             .filter(Boolean) as string[]
@@ -187,7 +155,7 @@ export default rdx`
   // Recursively walk through children
   if (node.children) {
     children = node.children
-      .map(childNode => {
+      .map((childNode) => {
         const childOptions = {
           ...options, // Tell all children inside <pre> tags to preserve newlines as text nodes
           preserveNewlines: preserveNewlines || node.tagName === 'pre'
@@ -198,36 +166,12 @@ export default rdx`
   }
 
   if (node.type === 'element') {
-    let { tagName } = node
-
-    if (tagName === 'em') {
-      return `*${children}*`
-    }
-    if (tagName === 'del') {
-      return `~~${children}~~`
-    }
-    if (tagName === 'strong') {
-      return `**${children}**`
-    }
+    const { tagName } = node
 
     const properties = node.properties || EMPTY_OBJECT
 
-    if (tagName === 'h4') {
-      tagName = properties.type
-      delete properties.id
-      delete properties.type
-
-      if (tagName && tagName in CARD_SHORTCUTS) {
-        tagName = CARD_SHORTCUTS[tagName]
-      }
-
-      if (tagName && tagName.startsWith('RDX')) {
-        tagName = `Reactive.${tagName}`
-      }
-    }
-
     const propertiesformatted = Object.keys(properties)
-      .map(prop => {
+      .map((prop) => {
         const value = properties[prop]
 
         if (prop === 'children' || prop === 'key' || prop === 'ref') {
@@ -304,7 +248,7 @@ export default rdx`
       return `\n{/** ${node.value} */}\n`
     }
 
-    return `{\n/**\n${lines.map(line => ` * ${line}`).join('\n')}\n */}`
+    return `{\n/**\n${lines.map((line) => ` * ${line}`).join('\n')}\n */}`
   }
 
   if (node.type === 'section') {
@@ -319,13 +263,13 @@ export default rdx`
     const table = {}
     const columns = []
 
-    node.children[0].children.forEach(child => {
+    node.children[0].children.forEach((child) => {
       const name = child.children[0].value
       columns.push(name)
       table[name] = []
     })
 
-    node.children.slice(1).forEach(row => {
+    node.children.slice(1).forEach((row) => {
       row.children.forEach((child, i) => {
         const value = child.children[0] ? child.children[0].value : undefined
         if (value) {
@@ -341,7 +285,7 @@ export default rdx`
 
     return columns
       .map(
-        id => `<list id="${id}" >{
+        (id) => `<list id="${id}" >{
 ${JSON.stringify(table[id], null, 2)}
 }</list>`
       )
@@ -365,7 +309,7 @@ export function toYaml(
   if (node.type === 'root') {
     let yaml: { id?: any; [key: string]: any } = {}
 
-    node.children.forEach(childNode => {
+    node.children.forEach((childNode) => {
       if (childNode.type === 'yaml') {
         yaml = Object.assign(yaml, childNode.properties)
       }
@@ -376,9 +320,10 @@ export function toYaml(
 }
 
 export function compile(this: any, options: any = {}) {
-  this.Compiler = tree => {
+  const _compiler = this.Compiler
+  this.Compiler = (props) => {
+    const { tree, meta } = _compiler(props)
     const content = toJSX(tree, {}, options)
-    const meta = toYaml(tree, {}, options)
     return { content, meta }
   }
 }
