@@ -17,8 +17,8 @@ export default function compact() {
   return (tree, _file) => {
     tree = filter(tree, squeeze)
     visit(tree, 'element', visitorFirstPass)
-    visit(tree, 'element', visitorSecondPass)
     visit(tree, 'root', removeSections)
+    visit(tree, 'element', visitorSecondPass)
 
     return tree
   }
@@ -179,16 +179,43 @@ function visitText(
   const { tagName, children } = child
   let text: string
   if (tagName === 'em') {
-    text = `*${children}*`
+    text = `*${children[0].value}*`
   }
   if (tagName === 'del') {
-    text = `~~${children}~~`
+    text = `~~${children[0].value}~~`
   }
   if (tagName === 'strong') {
-    text = `**${children}**`
+    text = `**${children[0].value}**`
   }
 
-  parent[index] = u('element', { tagName: 'text', properties: {} }, text)
+  child.tagName = 'text'
+  child.children[0].value = text
+
+  if (
+    parent.children.length > 1 &&
+    parent.type === 'element' &&
+    parent.tagName === 'text'
+  ) {
+    const siblings = parent.children
+    if (index > 0 && siblings[index - 1].type === 'text') {
+      siblings[index - 1].value = `${siblings[index - 1].value}${text}`
+      siblings.splice(index, 1)
+    } else if (
+      index < siblings.length - 1 &&
+      siblings[index + 1].type === 'text'
+    ) {
+      siblings[index + 1].value = `${text}${siblings[index + 1].value}`
+      siblings.splice(index, 1)
+    } else {
+      /** noop */
+    }
+  } else if (
+    parent.children.length === 1 &&
+    parent.type === 'element' &&
+    parent.tagName === 'text'
+  ) {
+    parent.children[0] = { type: 'text', value: text }
+  }
 }
 
 function removeSections(tree) {
