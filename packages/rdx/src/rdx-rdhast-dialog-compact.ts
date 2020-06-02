@@ -228,6 +228,6 @@ function removeSections(tree) {
       section++
     }
 
-    return section > 1
+    return node.type !== 'root' && node.type !== 'yaml' && section !== 1
   }
 }

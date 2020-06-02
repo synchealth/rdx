@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/language-mdast-hast",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Convert RDX AST to HAST",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
