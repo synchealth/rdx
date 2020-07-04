@@ -53,7 +53,7 @@
     "remark-images": "^1.0.0"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.0.23",
+    "@berun/dev-scripts": "^3.0.25",
     "@berun/preset-react": "^3.0.20"
   },
   "peerDependencies": {}

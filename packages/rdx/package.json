@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "perf_hooks": "^0.0.1",
-    "@berun/dev-scripts": "^3.0.23",
+    "@berun/dev-scripts": "^3.0.25",
     "@types/hast-format": "2.3.0",
     "@types/mdast": "^3.0.3",
     "@types/unist": "^2.0.3"
