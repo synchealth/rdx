@@ -8,7 +8,7 @@
   "authors": [
     "Tinia Labs",
     "Sync Health Labs <labs@noreply.sync.health>",
-    "Internet of Protocols Association"
+    "Internet Open Protocol Alliance"
   ],
   "keywords": [
     "markdown",
@@ -23,7 +23,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+    "url": "github:synchealthlabs/rdx",
+    "directory": "packages/rdx-langauge-md-mdast"
   },
   "scripts": {
     "build": "tsc",

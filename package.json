@@ -3,18 +3,15 @@
   "description": "Reactive Dialogs (RDX) for digital conversations",
   "private": true,
   "version": "0.5.0",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
-  },
+  "repository": "synchealth/rdx",
   "author": {
-    "name": "Internet Of Protocols Association (IOPA)"
+    "name": "Internet Open Protocol Alliance (IOPA)"
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
     "tslint": "^5.18.0",
-    "typescript": "3.9.2",
-    "ts-node": "^8.3.0",
+    "typescript": "4.0.5",
+    "ts-node": "^9.0.0",
     "@berun/dev-scripts": "^3.0.25"
   },
   "scripts": {
@@ -25,8 +22,8 @@
   "dependencies": {},
   "resolutions": {
     "babel-core": "7.0.0-bridge.0",
-    "@babel/core": "7.9.6",
-    "typescript": "3.9.2"
+    "@babel/core": "7.12.3",
+    "typescript": "4.0.5"
   },
   "workspaces": [
     "packages/*"

@@ -6,7 +6,7 @@
   "types": "src/index.ts",
   "authors": [
     "Sync Health Labs <labs@noreply.sync.health>",
-    "Internet of Protocols Association"
+    "Internet Open Protocol Alliance"
   ],
   "license": "MIT",
   "publishConfig": {
@@ -14,7 +14,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/synchealth/rdx.git"
+    "url": "github:synchealthlabs/rdx",
+    "directory": "packages/reactive-cards-util"
   },
   "scripts": {
     "build": "tsc",
