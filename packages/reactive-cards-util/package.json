@@ -30,7 +30,7 @@
   "devDependencies": {
     "adaptivecards": "^2.0.0-alpha.1",
     "hastscript": "^5.1.2",
-    "@berun/dev-scripts": "^3.0.25"
+    "@berun/dev-scripts": "^3.1.1"
   },
   "peerDependencies": {}
 }
