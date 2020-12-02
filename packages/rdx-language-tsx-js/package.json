@@ -38,7 +38,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/plugin-transform-typescript": "^7.10.4",
     "@babel/preset-env": "^7.8.7",
-    "@berun/berun": "3.2.0",
+    "@berun/berun": "^3.2.3",
     "@berun/fluent": "^3.2.3",
     "@berun/fluent-babel": "^3.2.3",
     "@berun/runner-jest": "^3.2.3",
