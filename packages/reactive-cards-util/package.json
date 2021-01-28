@@ -1,6 +1,6 @@
 {
   "name": "reactive-cards-util",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
   "types": "src/index.ts",
@@ -30,7 +30,7 @@
   "devDependencies": {
     "adaptivecards": "^2.0.0-alpha.1",
     "hastscript": "^5.1.2",
-    "@berun/dev-scripts": "^3.2.3"
+    "@berun/dev-scripts": "^7.0.3"
   },
   "peerDependencies": {}
 }

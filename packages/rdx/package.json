@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/rdx",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "Parse RDX Markdown and transpile to Reactive Dialogs JSX",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "perf_hooks": "^0.0.1",
-    "@berun/dev-scripts": "^3.2.3",
+    "@berun/dev-scripts": "^7.0.3",
     "@types/hast-format": "2.3.0",
     "@types/mdast": "^3.0.3",
     "@types/unist": "^2.0.3"

@@ -1,6 +1,6 @@
 {
   "name": "@rdx-js/language-md-mdast",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "Convert RDX Markdown to Unist Markdown AST (MDAST)",
   "main": "dist/index.js",
   "ts:main": "src/index.ts",
@@ -35,7 +35,7 @@
     "unist-util-visit": "^1.4.1"
   },
   "devDependencies": {
-    "@berun/dev-scripts": "^3.2.3"
+    "@berun/dev-scripts": "^7.0.3"
   },
   "peerDependencies": {}
 }
